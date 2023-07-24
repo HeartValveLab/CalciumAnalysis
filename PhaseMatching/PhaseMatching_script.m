@@ -6,11 +6,12 @@
 %  Created: 2023-07-24
 %  Updated: 2023-07-24
 
-close all; clear; clc;
+close all; clc;
 
 
 %% USERS INPUTS
-
+% TODO: allow for external input of arguments
+% TODO: compile code?
 FolderPath = 'C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\data\CardiacCycle\';
 FilenameCh1 = '0-499-Nuc.tif';
 FilenameCh2 = '0-499-Ca.tif';   % optional
@@ -32,48 +33,21 @@ Output = '111';
 
 
 %% Initiation
-pathnames = {
-    strcat(FolderPath, FilenameCh1), ...
-    strcat(FolderPath, FilenameCh2), ...
-    strcat(FolderPath, FilenameCh3)
-    };
-N_channels = sum([ ...
-                ~isempty(FilenameCh1), ...
-                ~isempty(FilenameCh2), ...
-                ~isempty(FilenameCh3) ...
-                ]);
-pathnameChMain = pathnames{MainCh};
-tifInfo = imfinfo(pathnameChMain);
-img_ref = imread(pathnameChMain, Phase);
+[pathnames, N_channels, pathnameChMain, tifInfo, img_ref] = initialise(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase);
 % figure(1);
 % imshow(img_ref);
 % title('This is our reference image for phase matching')
 
 
 %% Preliminary Phase Matching
-N = length(tifInfo);
-ssim_score_lst = zeros(N,1);
-
-for i_Frame = 1:N
-    img_sug = imread(pathnameChMain, i_Frame);
-    ssim_score = multissim3(img_sug, img_ref, NumScales = NumScales);
-    ssim_score_lst(i_Frame) = ssim_score;
-end
+[ssim_score_lst, N] = pre_phase_matching(tifInfo, pathnameChMain, img_ref, NumScales);
 
 figure(2);
 plot(1:N, ssim_score_lst);
 hold on;
 title('ssim scores');
 
-[pks, pk_locs] = findpeaks(ssim_score_lst, ...
-    MinPeakHeight = MinPeakHeight, ...
-    MinPeakProminence = MinPeakProminence);
-N_pks = length(pk_locs);
-
-if Phase == 1
-    pk_locs = [1; pk_locs];
-    pks = [ssim_score_lst(1); pks];
-end
+[pks, pk_locs, N_pks] = find_peaks(ssim_score_lst, MinPeakHeight, MinPeakProminence, Phase);
 
 figure(2);
 plot(pk_locs, pks, "*")
