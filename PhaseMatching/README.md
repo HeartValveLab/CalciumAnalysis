@@ -11,3 +11,6 @@ The phase matching program was designed to determine the frames in a video corre
   - Running large datasets on supercomputer
 
 The main algorithm employed utilises MATLAB's inbuilt `multissim3` which allows each video frame to be compared to some user defined reference and generates a similarity score based on luminance, contrast, and structure. The frames with the peak values are deeemed to be in phase with the reference and can be saved for further processing.
+
+## How to download and use
+
