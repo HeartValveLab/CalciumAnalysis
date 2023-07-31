@@ -1,17 +1,17 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration file="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching.prj" location="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching" name="PhaseMatching" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="2856279092" file="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching.prj" location="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching" name="PhaseMatching" preferred-package-location="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>PhaseMatching</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
     <param.authnamewatermark>Raymond Zhang</param.authnamewatermark>
-    <param.email />
-    <param.company />
+    <param.email>raymond.zhang@monash.edu</param.email>
+    <param.company>ARMI, Monash University</param.company>
     <param.summary>Performs phase matching for biological processes.</param.summary>
     <param.description />
     <param.screenshot />
     <param.guid />
-    <param.installpath.string>\PhaseMatching\</param.installpath.string>
+    <param.installpath.string>\ARMI, Monash University\PhaseMatching\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
     <param.logo />
     <param.install.notes />
@@ -46,6 +46,7 @@
       <param.icon />
       <param.icons />
       <param.version />
+      <param.authnamewatermark />
       <param.email />
       <param.company />
       <param.description />
@@ -84,13 +85,21 @@
     <fileset.package />
     <fileset.depfun>
       <file>${PROJECT_ROOT}\ManualCorrect.mlapp</file>
+      <file>${PROJECT_ROOT}\utility\adv_phase_matching.m</file>
       <file>${PROJECT_ROOT}\utility\auto_correct.m</file>
+      <file>${PROJECT_ROOT}\utility\find_peaks.m</file>
+      <file>${PROJECT_ROOT}\utility\init_output.m</file>
+      <file>${PROJECT_ROOT}\utility\initialise.m</file>
       <file>${PROJECT_ROOT}\utility\omemaker\bfCheckJavaMemory.m</file>
       <file>${PROJECT_ROOT}\utility\omemaker\bfCheckJavaPath.m</file>
       <file>${PROJECT_ROOT}\utility\omemaker\bfsave.m</file>
       <file>${PROJECT_ROOT}\utility\omemaker\createMinimalOMEXMLMetadata.m</file>
       <file>${PROJECT_ROOT}\utility\omemaker\is_octave.m</file>
       <file>${PROJECT_ROOT}\utility\omemaker\padnumber.m</file>
+      <file>${PROJECT_ROOT}\utility\pre_phase_matching.m</file>
+      <file>${PROJECT_ROOT}\utility\save_all.m</file>
+      <file>${PROJECT_ROOT}\utility\save_multitiff.m</file>
+      <file>${PROJECT_ROOT}\utility\save_phase.m</file>
     </fileset.depfun>
     <build-deliverables>
       <file location="${PROJECT_ROOT}\PhaseMatching\for_testing" name="readme.txt" optional="true">C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching\for_testing\readme.txt</file>
