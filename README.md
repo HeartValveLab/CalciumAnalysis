@@ -1,4 +1,4 @@
-# UROP
+# UROP - ARMI
 
 The heart is fascinating in that it starts to beat while it is still forming. However, this also makes studying how the heart forms difficult - the heart moves rapidly during heartbeat and capturing the behaviour of heart cells requires the development of novel image analysis methods. This project will involve programming in Matlab to help build new software to analyse fluorescent images of the beating heart.
 
