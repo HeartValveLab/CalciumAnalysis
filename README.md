@@ -8,3 +8,15 @@ This GitHub repository documents the code worked on by Raymond Zhang during his 
 2. Signal vs Time
 
 Please see their respective folders for more information.
+
+## TODO:
+- [x] GUI & script: separate out functions so that they can be accessed by both 
+- [ ] GUI: add pop-up window to display messages to user
+- [ ] GUI: improve UI flow and experience
+- [ ] GUI: test and identify potential errors and handling
+- [ ] GUI: package app for deployment
+- [ ] Script: allow inputs from terminal
+- [ ] Script: investigate running on HPC
+- [ ] Protocol: contact Sam Crossman
+- [ ] Protocol: write up protocol
+- [ ] Protocol: make video tutorial
