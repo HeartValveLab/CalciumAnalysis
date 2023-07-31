@@ -10,7 +10,8 @@ This GitHub repository documents the code worked on by Raymond Zhang during his 
 Please see their respective folders for more information.
 
 ## TODO:
-- [x] GUI & script: separate out functions so that they can be accessed by both 
+- [x] General: separate out functions so that they can be accessed by both
+- [ ] General: start on signal vs time code
 - [x] GUI: add pop-up window to display messages to user
 - [ ] GUI: improve UI flow and experience
 - [ ] GUI: test and identify potential errors and handling
