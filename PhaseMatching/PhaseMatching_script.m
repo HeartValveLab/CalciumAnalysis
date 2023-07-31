@@ -7,11 +7,13 @@
 %  Updated: 2023-07-24
 
 close all; clc;
-
+addpath(genpath('utility'))
 
 %% USERS INPUTS
 % TODO: allow for external input of arguments
 % TODO: compile code?
+disp('Initialising inputs');
+
 FolderPath = 'C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\data\CardiacCycle\';
 FilenameCh1 = '0-499-Nuc.tif';
 FilenameCh2 = '0-499-Ca.tif';   % optional
@@ -33,6 +35,8 @@ Output = '111';
 
 
 %% Initiation
+disp('Initiating inputs');
+
 [pathnames, N_channels, pathnameChMain, tifInfo, img_ref] = initialise(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase);
 % figure(1);
 % imshow(img_ref);
@@ -40,6 +44,7 @@ Output = '111';
 
 
 %% Preliminary Phase Matching
+disp('Performing preliminary phase matching');
 [ssim_score_lst, N] = pre_phase_matching(tifInfo, pathnameChMain, img_ref, NumScales);
 
 figure(2);
@@ -54,6 +59,7 @@ plot(pk_locs, pks, "*")
 
 
 %% ROI Based Phase Matching
+disp('Performing advanced phase matching');
 [cutLength, ImagesToSave] = init_output(pk_locs, Padding, N_channels, N_pks);
 
 xbounds = ceil(ROI(1)):floor(ROI(1)+ROI(3));
@@ -64,6 +70,7 @@ ImagesToSave = adv_phase_matching(N_pks, pathnameChMain, xbounds, ybounds, Phase
 
 
 %% Output
+disp('Saving files');
 outputFolder = OutputName;
 outputFileName = OutputName;
 folder_w = [FolderPath, outputFolder];
