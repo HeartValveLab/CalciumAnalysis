@@ -27,8 +27,3 @@ The main algorithm employed utilises MATLAB's inbuilt `multissim3` which allows 
 cd Documents\GitHub\UROP\PhaseMatching
 mat PhaseMatching_script
 ```
-
-```
-ssh rzha0074@monarch.erc.monash.edu
-ssh rzha0074@m3.massive.org.au
-```
