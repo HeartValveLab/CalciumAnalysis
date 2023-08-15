@@ -12,9 +12,9 @@ addpath(genpath('utility'))
 %% USERS INPUTS
 disp('Initialising inputs');
 
-FolderPath = 'C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\data\CardiacCycle\';
-FilenameCh1 = 'z005-Nuc.tif';
-FilenameCh2 = 'z005-Ca.tif';    % optional
+FolderPath = 'C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\data\CardiacCycle_full\';
+FilenameCh1 = 'z005_Nuc.tif';
+FilenameCh2 = 'z005_Ca.tif';    % optional
 FilenameCh3 = '';               % optional
 
 outputFolder = 'CaSignalVsTime';
@@ -153,20 +153,20 @@ imageName = fullfile(folder_w,'Normalised to baseline 3');
 saveas(gcf,imageName,'tiff');
 
 % Make graph movie
-outputFolder2 = '\GraphMovie';
-folder_mov=[folder_w,outputFolder2];
-mkdir (folder_mov);
-for i = 1:length(NormSignalByBackground)
-    
-figure
-plot(0:xaxisScale:xaxisScale*(i-1), NormSignalByBackground(1:i), 'k');
-xlabel('time (ms)');
-ylabel('Normalised Calcium Signal');
-axis([0,4*10^4,0,max(NormSignalByBackground)]);
-iName = string(i);
-imageName = fullfile(folder_mov,iName)
-saveas(gcf,imageName,'tiff');
+% outputFolder2 = '\GraphMovie';
+% folder_mov=[folder_w,outputFolder2];
+% mkdir (folder_mov);
+% for i = 1:length(NormSignalByBackground)
+%     
+% figure
+% plot(0:xaxisScale:xaxisScale*(i-1), NormSignalByBackground(1:i), 'k');
+% xlabel('time (ms)');
+% ylabel('Normalised Calcium Signal');
+% axis([0,4*10^4,0,max(NormSignalByBackground)]);
+% iName = string(i);
+% imageName = fullfile(folder_mov,iName);
+% saveas(gcf,imageName,'tiff');
+% 
+% end
 
-end
-
-close all
+%close all
