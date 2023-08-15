@@ -24,19 +24,19 @@ Phase = 1;  % frame to be used for reference
 disp('Processing inputs');
 [pathnames, N_channels, pathnameChMain, tifInfo, img_ref] = initialise(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase);
 
-%% Get overlay
+%% Get and save overlay
 N = length(tifInfo);
 ImagesToSave = cell(1,N_channels);
 
 for ch = 1:N_channels
     ImagesToSave{ch} = zeros(tifInfo(1).Height, tifInfo(1).Width);
     for frame = 1:N
-        img = double(imread(pathnames{ch}, frame));
-        ImagesToSave{ch} = ImagesToSave{ch} + img;
+        img = imread(pathnames{ch}, frame);
+        ImagesToSave{ch} = ImagesToSave{ch} + double(img);
     end
-    ImagesToSave{ch} = uint16(ImagesToSave{ch}/N);
-    %imshow(imadjust(ImagesToSave{ch}))
-    ImageFile = ['Channel' {ch} '_overlay.tif'];
+    ImagesToSave{ch} = uint8(ImagesToSave{ch}/N);
+    imshow(ImagesToSave{ch})
+    ImageFile = ['Channel', num2str(ch), '_overlay.tif'];
     imwrite(ImagesToSave{ch}, [FolderPath,filesep,ImageFile], 'tif')
 end
 

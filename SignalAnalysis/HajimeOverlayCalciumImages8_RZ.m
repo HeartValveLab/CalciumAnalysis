@@ -35,8 +35,8 @@ for i = 2:N
     C_Ca = C_Ca + double(A_Ca);
 end
 
-    CaOverlay = uint16(C_Ca/N);
-    NucOverlay = uint16(C_Nuc/N);
+    CaOverlay = uint8(C_Ca/N);
+    NucOverlay = uint8(C_Nuc/N);
 
 %% Displaying output images
 if 1 == 1
