@@ -12,7 +12,7 @@ Please see their respective folders for more information.
 ## TODO:
 - [x] General: separate out functions so that they can be accessed by both
 - [x] General: start on signal vs time code
-- [ ] General: save GUI settings into .txt OR overhead file
+- [x] General: save GUI settings into .txt OR overhead file
 - [x] GUI: add pop-up window to display messages to user
 - [ ] GUI: improve UI flow and experience
 - [ ] GUI: test and identify potential errors and handling
