@@ -11,13 +11,13 @@ Please see their respective folders for more information.
 
 ## TODO:
 - [x] General: separate out functions so that they can be accessed by both
-- [ ] General: start on signal vs time code
+- [x] General: start on signal vs time code
 - [x] GUI: add pop-up window to display messages to user
 - [ ] GUI: improve UI flow and experience
 - [ ] GUI: test and identify potential errors and handling
 - [ ] GUI: package app for deployment
 - [ ] Script: allow inputs from terminal
 - [ ] Script: investigate running on HPC
-- [ ] Protocol: contact Sam Crossman
+- [x] Protocol: contact Sam Crossman
 - [ ] Protocol: write up protocol
 - [ ] Protocol: make video tutorial
