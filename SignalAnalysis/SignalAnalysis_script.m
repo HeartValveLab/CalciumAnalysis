@@ -6,7 +6,7 @@
 %  Created: 2023-08-07
 %  Updated: 2023-08-22
 
-close all; clc; clear;
+close all; clc; %clear;
 addpath(genpath('utility'))
 
 %% USERS INPUTS
@@ -21,12 +21,15 @@ outputFolder = 'CaSignalVsTime';
 folder_w=[FolderPath,outputFolder];
 mkdir (folder_w);
 
+StartFrame = 1;
+EndFrame = 10;
+
 MainCh = 1; % channel to be used for reference, not required
 Phase = 1;  % frame to be used for reference, not required
 
 samplingRate = 20;  % exposure time millisecond
 meanDist = 13.1351;    % frames per cycle
-startImage = 1;
+
 
 %% Initiation
 disp('Processing inputs');
@@ -34,20 +37,8 @@ disp('Processing inputs');
 
 %% Get and save overlay
 disp('Overlaying movie')
-N = length(tifInfo);
-ImagesToSave = cell(1,N_channels);
 
-for ch = 1:N_channels
-    ImagesToSave{ch} = zeros(tifInfo(1).Height, tifInfo(1).Width);
-    for frame = 1:N
-        img = imread(pathnames{ch}, frame);
-        ImagesToSave{ch} = ImagesToSave{ch} + double(img);
-    end
-    ImagesToSave{ch} = uint8(ImagesToSave{ch}/N);
-    %imshow(ImagesToSave{ch})
-    ImageFile = ['Channel', num2str(ch), '_overlay.tif'];
-    imwrite(ImagesToSave{ch}, [FolderPath,filesep,ImageFile], 'tif')
-end
+ImagesToSave = overlay(EndFrame, tifInfo, N_channels, StartFrame, pathnames, FolderPath);
 
 
 %% Draw and create region of interest
