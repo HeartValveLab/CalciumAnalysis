@@ -4,7 +4,7 @@
 %
 %  Author: Raymond Zhang
 %  Created: 2023-08-07
-%  Updated: 2023-08-07
+%  Updated: 2023-08-22
 
 close all; clc; clear;
 addpath(genpath('utility'))
@@ -25,7 +25,7 @@ MainCh = 1; % channel to be used for reference, not required
 Phase = 1;  % frame to be used for reference, not required
 
 samplingRate = 20;  % exposure time millisecond
-meanDist = 14.4;    % frames per cycle
+meanDist = 13.1351;    % frames per cycle
 startImage = 1;
 
 %% Initiation
@@ -52,22 +52,26 @@ end
 
 %% Draw and create region of interest
 disp('Performing signal analysis')
+NucOverlay = mat2gray(ImagesToSave{1});
 CaOverlay = mat2gray(ImagesToSave{2});
+fusedChannel = imfuse(CaOverlay, NucOverlay);
 
 % Draw and create region of interest
-imshow(CaOverlay,[])
+%imshow(CaOverlay,[])
+imshow(fusedChannel)
 axis on;
 title('Do not close this figure window till end of script!', 'FontSize', 16);
-set(gcf, 'Position', get(0,'Screensize')); 
+%set(gcf, 'Position', get(0,'Screensize')); % Sets image to full screen
 message = sprintf('Left click and hold to begin drawing.\nSimply lift the mouse button to finish');
 uiwait(msgbox(message));
 hFH = imfreehand(); % drawrectangle
 binaryImage = hFH.createMask();
 xy = hFH.getPosition;
+%close(1);
 
 % Save region of interest image
 figure;
-imshow(CaOverlay);
+imshow(fusedChannel);
 hold on;
 boundaries = bwboundaries(binaryImage);
 numberOfBoundaries = size(boundaries, 1);
@@ -99,24 +103,25 @@ CaSignal = Signal{2};
 xaxisScale = meanDist*samplingRate; % time in (ms) 
 xaxisScale2 = meanDist;  % time in (# movie frames)
 
-figure
-plot(0:xaxisScale:(N-1)*xaxisScale, CaSignal, 'g');
-hold on
-plot(0:xaxisScale:(N-1)*xaxisScale, NucSignal, 'm');
-xlabel('time (ms)');
-ylabel('Calcium signal and Nuclear signal');
-legend('CaSignal','NucSignal')
-imageName = fullfile(folder_w,'Calcium and Nuclear Signal');
-saveas(gcf,imageName,'tiff');
-
-figure
-plot(0:xaxisScale2:(N-1)*xaxisScale2, CaSignal, 'g');
-hold on
-plot(0:xaxisScale2:(N-1)*xaxisScale2, NucSignal, 'm');
-xlabel('time (frames)');
-ylabel('Calcium signal and Nuclear signal');
-imageName = fullfile(folder_w,'Calcium and Nuclear Signal 2');
-saveas(gcf,imageName,'tiff');
+% figure
+% plot(0:xaxisScale:(N-1)*xaxisScale, CaSignal, 'g');
+% hold on
+% plot(0:xaxisScale:(N-1)*xaxisScale, NucSignal, 'm');
+% xlabel('time (ms)');
+% ylabel('Calcium signal and Nuclear signal');
+% legend('CaSignal','NucSignal')
+% imageName = fullfile(folder_w,'Calcium and Nuclear Signal');
+% saveas(gcf,imageName,'tiff');
+% 
+% figure
+% plot(0:xaxisScale2:(N-1)*xaxisScale2, CaSignal, 'g');
+% hold on
+% plot(0:xaxisScale2:(N-1)*xaxisScale2, NucSignal, 'm');
+% xlabel('time (frames)');
+% ylabel('Calcium signal and Nuclear signal');
+% legend('CaSignal','NucSignal')
+% imageName = fullfile(folder_w,'Calcium and Nuclear Signal 2');
+% saveas(gcf,imageName,'tiff');
 
 figure
 plot(0:1:(N-1)*1, CaSignal, 'g');
@@ -124,6 +129,7 @@ hold on
 plot(0:1:(N-1)*1, NucSignal, 'm');
 xlabel('time (frames in SelectedT movie)');
 ylabel('Calcium signal and Nuclear signal');
+legend('CaSignal','NucSignal')
 imageName = fullfile(folder_w,'Calcium and Nuclear Signal 3');
 saveas(gcf,imageName,'tiff');
 
@@ -131,19 +137,19 @@ saveas(gcf,imageName,'tiff');
 Baseline = min(CaSignal./NucSignal);
 NormSignalByBackground = (CaSignal./NucSignal - Baseline)/(Baseline);
 
-figure
-plot(0:xaxisScale:(N-1)*xaxisScale, NormSignalByBackground, 'k');
-xlabel('time (ms)');
-ylabel('Normalised Calcium Signal');
-imageName = fullfile(folder_w,'Normalised to baseline');
-saveas(gcf,imageName,'tiff');
-
-figure
-plot(0:xaxisScale2:(N-1)*xaxisScale2, NormSignalByBackground, 'k');
-xlabel('time (frames)');
-ylabel('Normalised Calcium Signal');
-imageName = fullfile(folder_w,'Normalised to baseline 2');
-saveas(gcf,imageName,'tiff');
+% figure
+% plot(0:xaxisScale:(N-1)*xaxisScale, NormSignalByBackground, 'k');
+% xlabel('time (ms)');
+% ylabel('Normalised Calcium Signal');
+% imageName = fullfile(folder_w,'Normalised to baseline');
+% saveas(gcf,imageName,'tiff');
+% 
+% figure
+% plot(0:xaxisScale2:(N-1)*xaxisScale2, NormSignalByBackground, 'k');
+% xlabel('time (frames)');
+% ylabel('Normalised Calcium Signal');
+% imageName = fullfile(folder_w,'Normalised to baseline 2');
+% saveas(gcf,imageName,'tiff');
 
 figure
 plot(0:1:(N-1)*1, NormSignalByBackground, 'k');
@@ -169,4 +175,28 @@ saveas(gcf,imageName,'tiff');
 % 
 % end
 
-%close all
+%close(1)
+
+%% Analysis
+% Z = ct_pulseanalysis(NormSignalByBackground','TSAMP',14.4,'MAXW',5);
+% 
+% Ztime = Z;
+% Ztime.pkpos = Ztime.pkpos * (meanDist * samplingRate);
+% Ztime.mpos = Ztime.mpos * (meanDist * samplingRate);
+% Ztime.rise = Ztime.rise * (meanDist * samplingRate);
+% Ztime.fall = Ztime.fall * (meanDist * samplingRate);
+% Ztime.dur = Ztime.dur * (meanDist * samplingRate);
+% 
+% figure
+% plot(0:xaxisScale:(N-1)*xaxisScale, NormSignalByBackground, 'k');
+% xlabel('time (ms)');
+% ylabel('Normalised Calcium Signal');
+% imageName = fullfile(folder_w,'Peak Positions');
+% hold on
+% 
+% for i = 1:length(Z.pkpos)
+%     line([Z.pkpos(i),Z.pkpos(i)],[0,0.5],'Color','r','LineWidth',1); 
+% end
+% text(Z.pkpos,Z.peak+0.02,num2str((1:numel(Z.pkpos))'),'Color','r') 
+
+%saveas(gcf,imageName,'tiff');

@@ -53,6 +53,7 @@ hold on;
 title('ssim scores');
 
 [pks, pk_locs, N_pks] = find_peaks(ssim_score_lst, MinPeakHeight, MinPeakProminence, Phase);
+mean_dist = mean(diff(pk_locs));
 
 figure(2);
 plot(pk_locs, pks, "*")
