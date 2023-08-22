@@ -23,6 +23,8 @@ The main algorithm employed utilises MATLAB's inbuilt `multissim3` which allows 
 1. Clone this repository
 2. Open in MATLAB and folder to path
 3. Follow instructions in BioProtocol
+
+### Command line
 ```
 cd Documents\GitHub\UROP\PhaseMatching
 mat PhaseMatching_script
