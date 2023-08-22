@@ -17,8 +17,10 @@ Please see their respective folders for more information.
 - [ ] GUI: improve UI flow and experience
 - [ ] GUI: test and identify potential errors and handling
 - [ ] GUI: package app for deployment
+- [ ] GUI: Signal vs Time GUI
 - [ ] Script: allow inputs from terminal
 - [ ] Script: investigate running on HPC
+- [ ] Script: Signal vs Time code
 - [x] Protocol: contact Sam Crossman
 - [ ] Protocol: write up protocol
 - [ ] Protocol: make video tutorial
