@@ -6,23 +6,20 @@
 %  Created: 2023-08-07
 %  Updated: 2023-08-22
 
-close all; clc; %clear;
+close all; clc; clear;
 addpath(genpath('utility'))
 
 %% USERS INPUTS
 disp('Initialising inputs');
 
-FolderPath = 'C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\data\CardiacCycle_full\';
-FilenameCh1 = 'z005_Nuc.tif';
-FilenameCh2 = 'z005_Ca.tif';    % optional
-FilenameCh3 = '';               % optional
-
-outputFolder = 'CaSignalVsTime';
-folder_w=[FolderPath,outputFolder];
-mkdir (folder_w);
-
+FolderPath = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\CardiacCycle\';
+FileNameNucCh = 'z005-Nuc.tif';
+FileNameCaCh = 'z005-Ca.tif';
 StartFrame = 1;
-EndFrame = 10;
+EndFrame = 37;
+
+OutputFolder = 'CaSignalVsTime';
+
 
 MainCh = 1; % channel to be used for reference, not required
 Phase = 1;  % frame to be used for reference, not required
@@ -32,19 +29,23 @@ meanDist = 13.1351;    % frames per cycle
 
 
 %% Initiation
-disp('Processing inputs');
-[pathnames, N_channels, pathnameChMain, tifInfo, img_ref] = initialise(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase);
+disp('Initiating user inputs');
+[FilePaths, OutputPath, TifInfo, N_frames, N_channels, EndFrame] = initialise(FolderPath, FileNameNucCh, FileNameCaCh, StartFrame, EndFrame, OutputFolder);
+disp('User inputs accepted')
 
 %% Get and save overlay
-disp('Overlaying movie')
-
-ImagesToSave = overlay(EndFrame, tifInfo, N_channels, StartFrame, pathnames, FolderPath);
-
+disp('Overlaying movie frames')
+OverlayedNuc = overlay(FilePaths{1}, TifInfo, StartFrame, EndFrame, N_frames);
+imwrite(OverlayedNuc, [OutputPath, filesep, 'OverlayedNuc.tif'], 'tif')
+OverlayedCa = overlay(FilePaths{2}, TifInfo, StartFrame, EndFrame, N_frames);
+imwrite(OverlayedCa, [OutputPath, filesep, 'OverlayedCa.tif'], 'tif')
+OverlayedImages = {OverlayedNuc, OverlayedCa};
+disp('Overlay complete')
 
 %% Draw and create region of interest
 disp('Performing signal analysis')
-NucOverlay = mat2gray(ImagesToSave{1});
-CaOverlay = mat2gray(ImagesToSave{2});
+NucOverlay = mat2gray(OverlayedImages{1});
+CaOverlay = mat2gray(OverlayedImages{2});
 fusedChannel = imfuse(CaOverlay, NucOverlay);
 
 % Draw and create region of interest
@@ -57,28 +58,33 @@ message = sprintf('Left click and hold to begin drawing.\nSimply lift the mouse 
 uiwait(msgbox(message));
 hFH = imfreehand(); % drawrectangle
 binaryImage = hFH.createMask();
+save("test.mat","binaryImage")
 xy = hFH.getPosition;
 %close(1);
 
+fid = fopen([OutputPath, '\PhaseMatchingSession_', datestr(now, 'ddmmyyyy_HHMMSS'), '.m'], 'wt' );
+fprintf(fid, [repmat('%d\t', 1, size(binaryImage, 2)) '\n'], binaryImage');
+fclose(fid);
+
 % Save region of interest image
-figure;
-imshow(fusedChannel);
-hold on;
-boundaries = bwboundaries(binaryImage);
-numberOfBoundaries = size(boundaries, 1);
-for k = 1 : numberOfBoundaries
-    thisBoundary = boundaries{k};
-    plot(thisBoundary(:,2), thisBoundary(:,1), 'y', 'LineWidth', 1);
-end
-hold off;
-imageName = fullfile(folder_w,'ROI');
-saveas(gcf,imageName,'tiff');
+% figure;
+% imshow(fusedChannel);
+% hold on;
+% boundaries = bwboundaries(binaryImage);
+% numberOfBoundaries = size(boundaries, 1);
+% for k = 1 : numberOfBoundaries
+%     thisBoundary = boundaries{k};
+%     plot(thisBoundary(:,2), thisBoundary(:,1), 'y', 'LineWidth', 1);
+% end
+% hold off;
+% imageName = fullfile(folder_w,'ROI');
+% saveas(gcf,imageName,'tiff');
 
 %% Calculate signal vs time
 SignalTemp = cell(1,N_channels);
 Signal = cell(1,N_channels);
 for ch = 1:N_channels
-    for frame = startImage:N
+    for frame = StartFrame:EndFrame
         img = imread(pathnames{ch}, frame);
         ROI_mean_intensity = regionprops(binaryImage, img, 'MeanIntensity');  
         SignalTemp{ch} = [SignalTemp{ch}, ROI_mean_intensity];

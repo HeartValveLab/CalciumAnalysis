@@ -1,15 +1,14 @@
-function [pathnames, N_channels, pathnameChMain, tifInfo, img_ref] = initialise(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase)
-    pathnames = {
-                strcat(FolderPath, FilenameCh1), ...
-                strcat(FolderPath, FilenameCh2), ...
-                strcat(FolderPath, FilenameCh3)
+function [FilePaths, OutputPath, TifInfo, N_frames, N_channels, EndFrame] = initialise(FolderPath, FilenameNucCh, FilenameCaCh, StartFrame, EndFrame, OutputFolder);
+    FilePaths = {
+                strcat(FolderPath, FilenameNucCh), ...
+                strcat(FolderPath, FilenameCaCh), ...
                 };
-    N_channels = sum([ ...
-                    ~isempty(FilenameCh1), ...
-                    ~isempty(FilenameCh2), ...
-                    ~isempty(FilenameCh3) ...
-                    ]);
-    pathnameChMain = pathnames{MainCh};
-    tifInfo = imfinfo(pathnameChMain);
-    img_ref = imread(pathnameChMain, Phase);
+    OutputPath = [FolderPath, OutputFolder];
+    mkdir(OutputPath);
+    TifInfo = imfinfo(FilePaths{1});
+    if EndFrame == 0
+        EndFrame = length(TifInfo);
+    end
+    N_frames = EndFrame - StartFrame - 1;
+    N_channels = 2;
 end
