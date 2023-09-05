@@ -9,6 +9,6 @@ function [FilePaths, OutputPath, TifInfo, N_frames, N_channels, EndFrame] = init
     if EndFrame == 0
         EndFrame = length(TifInfo);
     end
-    N_frames = EndFrame - StartFrame - 1;
+    N_frames = EndFrame - StartFrame + 1;
     N_channels = 2;
 end

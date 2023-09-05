@@ -4,22 +4,22 @@
 %
 %  Author: Raymond Zhang
 %  Created: 2023-08-07
-%  Updated: 2023-09-05
+%  Updated: 2023-08-22
 
 close all; clc; clear;
 addpath(genpath('utility'))
 
 %% USERS INPUTS
 disp('Reading user inputs');
-FolderPath = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\CardiacCycle\';
+FolderPath = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\CardiacCycle_full\';
 FileNameNucCh = 'z005-Nuc.tif';
 FileNameCaCh = 'z005-Ca.tif';
 StartFrame = 1;
 EndFrame = 0;
 OutputFolder = 'CaSignalVsTime';
-ExposureTime = 25;  % exposure time millisecond
-MeanDist = 13.1351;    % frames per cycle
-visibility = 'off'; % display figures or not
+samplingRate = 25;  % exposure time millisecond
+meanDist = 13.1351;    % frames per cycle
+visibility = 'on'; % display figures or not
 disp('User inputs read');
 
 
@@ -45,8 +45,8 @@ disp('Creating region of interest')
 NucOverlay = mat2gray(OverlayedImages{1});
 CaOverlay = mat2gray(OverlayedImages{2});
 fusedChannel = imfuse(CaOverlay, NucOverlay);
-switch visibility
-    case 'on'
+switch 'script'
+    case 'app'
         imshow(fusedChannel)
         axis on;
         title('Do not close this figure window till end of script!', 'FontSize', 16);
@@ -56,7 +56,7 @@ switch visibility
         ROI_boundary = hFH.createMask();
         save("ROI_boundary.mat","ROI_boundary")
         close();
-    case 'off'
+    case 'script'
         load("ROI_boundary.mat")
 end
 save_ROI(fusedChannel, ROI_boundary, OutputPath)
@@ -70,10 +70,11 @@ SignalCa = calculate_signal(StartFrame,EndFrame,FilePaths{2},ROI_boundary);
 disp('Signal intensity calculated')
 
 
-%% Plot Raw Signal
+%% Plot graph
 disp('Plotting raw signal graph')
 
-figure('Visible',visibility);
+figure('Visible','on');
+subplot(1,3,1)
 hold on
 plot(0:1:(N_frames-1)*1, SignalCa, 'g');
 plot(0:1:(N_frames-1)*1, SignalNuc, 'm');
@@ -81,81 +82,72 @@ title('Raw signal - cycles')
 xlabel('Time [cycles]');
 ylabel('Signal Intensity');
 legend('CaSignal','NucSignal')
-imageName = fullfile(OutputPath,'Raw Calcium and Nuclear Signal - cycles');
-saveas(gcf,imageName,'tiff');
 
-figure('Visible',visibility);
+subplot(1,3,2)
 hold on
-frame_scale = MeanDist; % plot according to number of actual frames
+frame_scale = meanDist; % plot according to number of actual frames
 plot(0:frame_scale:(N_frames-1)*frame_scale, SignalCa, 'g');
 plot(0:frame_scale:(N_frames-1)*frame_scale, SignalNuc, 'm');
 title('Raw signal - frames')
 xlabel('Time [frames]');
 ylabel('Signal Intensity');
 legend('CaSignal','NucSignal')
-imageName = fullfile(OutputPath,'Raw Calcium and Nuclear Signal - frames');
-saveas(gcf,imageName,'tiff');
 
-figure('Visible',visibility);
+subplot(1,3,3)
 hold on
-time_scale = MeanDist*ExposureTime/1000; % plot according to real time
+time_scale = meanDist*samplingRate/1000; % plot according to real time
 plot(0:time_scale:(N_frames-1)*time_scale, SignalCa, 'g');
 plot(0:time_scale:(N_frames-1)*time_scale, SignalNuc, 'm');
 title('Raw signal - time')
 xlabel('Time [s]');
 ylabel('Signal Intensity');
 legend('CaSignal','NucSignal')
-imageName = fullfile(OutputPath,'Raw Calcium and Nuclear Signal - seconds');
+
+imageName = fullfile(OutputPath,'Raw Calcium and Nuclear Signal');
 saveas(gcf,imageName,'tiff');
 
 disp('Raw signal graph plotted')
 
-
-%% Normalise Calcium signal
-disp('Calculating and plotting normalised signal');
+%% Normalise to background Ca level and Nuc
+disp('Calculating and plotting normalised si')
 Baseline = min(SignalCa./SignalNuc);
 NormSignalByBackground = (SignalCa./SignalNuc - Baseline)/(Baseline);
 
-figure('Visible',visibility);
+figure('Visible','on');
+subplot(1,3,1)
 hold on
 plot(0:1:(N_frames-1)*1, NormSignalByBackground, 'k');
 title('Normalised calcium signal - cycles')
 xlabel('Time [cycles]');
 ylabel('Signal Intensity');
-imageName = fullfile(OutputPath,'Normalised Calcium Signal - cycles');
-saveas(gcf,imageName,'tiff');
 
-figure('Visible',visibility);
+subplot(1,3,2)
 hold on
-frame_scale = MeanDist; % plot according to number of actual frames
+frame_scale = meanDist; % plot according to number of actual frames
 plot(0:frame_scale:(N_frames-1)*frame_scale, NormSignalByBackground, 'k');
 title('Normalised calcium signal - frames')
 xlabel('Time [frames]');
 ylabel('Signal Intensity');
-imageName = fullfile(OutputPath,'Normalised Calcium Signal - frames');
-saveas(gcf,imageName,'tiff');
 
-figure('Visible',visibility);
+subplot(1,3,3)
 hold on
-time_scale = MeanDist*ExposureTime/1000; % plot according to real time
+time_scale = meanDist*samplingRate/1000; % plot according to real time
 plot(0:time_scale:(N_frames-1)*time_scale, NormSignalByBackground, 'k');
 title('Normalised calcium signal - time')
 xlabel('Time [s]');
 ylabel('Signal Intensity');
-imageName = fullfile(OutputPath,'Normalised Calcium Signal - seconds');
-saveas(gcf,imageName,'tiff');
 
-disp('Normalised signal plotted');
+imageName = fullfile(OutputPath,'Normalised Calcium Signal');
+saveas(gcf,imageName,'tiff');
 
 
 %% Make graph movie
-disp('Creating graph movie');
 GraphMoviePath = [OutputPath,'\GraphMovie'];
 mkdir(GraphMoviePath);
 
 for i = 1:N_frames
     figure('Visible','off')
-    time_scale = MeanDist*ExposureTime/1000; % plot according to real time
+    time_scale = meanDist*samplingRate/1000; % plot according to real time
     plot(0:time_scale:(i-1)*time_scale, NormSignalByBackground(1:i), 'k');
     title('Normalised Calcium Signal')
     xlabel('Time [s]');
@@ -166,12 +158,31 @@ for i = 1:N_frames
     saveas(gcf,imageName,'tiff');
 end
 close all;
-disp('Graph movie created');
 
+
+
+% function for overlaying multiple signals???
 
 %% Analysis
+% Z = ct_pulseanalysis(NormSignalByBackground','TSAMP',14.4,'MAXW',5);
+% 
+% Ztime = Z;
+% Ztime.pkpos = Ztime.pkpos * (meanDist * samplingRate);
+% Ztime.mpos = Ztime.mpos * (meanDist * samplingRate);
+% Ztime.rise = Ztime.rise * (meanDist * samplingRate);
+% Ztime.fall = Ztime.fall * (meanDist * samplingRate);
+% Ztime.dur = Ztime.dur * (meanDist * samplingRate);
+% 
+% figure
+% plot(0:xaxisScale:(N-1)*xaxisScale, NormSignalByBackground, 'k');
+% xlabel('time (ms)');
+% ylabel('Normalised Calcium Signal');
+% imageName = fullfile(folder_w,'Peak Positions');
+% hold on
+% 
+% for i = 1:length(Z.pkpos)
+%     line([Z.pkpos(i),Z.pkpos(i)],[0,0.5],'Color','r','LineWidth',1); 
+% end
+% text(Z.pkpos,Z.peak+0.02,num2str((1:numel(Z.pkpos))'),'Color','r') 
 
-
-%% Finishing remarks
-disp('Script finished running')
-
+%saveas(gcf,imageName,'tiff');
