@@ -1,4 +1,4 @@
-%% Phase Matching
+%% %% Phase Matching
 %  A script version of the Phase Matching GUI app. It allows users run the
 %  automatic version of the code when the dataset is large on a HPC.
 %

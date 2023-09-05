@@ -9,6 +9,7 @@
 close all; clc; clear;
 addpath(genpath('utility'))
 
+
 %% USERS INPUTS
 disp('Reading user inputs');
 FolderPath = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\CardiacCycle\';
@@ -45,6 +46,7 @@ disp('Creating region of interest')
 NucOverlay = mat2gray(OverlayedImages{1});
 CaOverlay = mat2gray(OverlayedImages{2});
 fusedChannel = imfuse(CaOverlay, NucOverlay);
+
 switch visibility
     case 'on'
         imshow(fusedChannel)
@@ -59,6 +61,7 @@ switch visibility
     case 'off'
         load("ROI_boundary.mat")
 end
+
 save_ROI(fusedChannel, ROI_boundary, OutputPath)
 disp('Region of interest saved')
 
