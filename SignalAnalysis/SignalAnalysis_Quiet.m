@@ -22,7 +22,7 @@ OutputFolder = 'CaSignalVsTime';
 ExposureTime = 25;              % exposure time in milliseconds
 MeanDist = 13.1351;             % frames per cycle
 Visibility = 'off';             % display figures or not
-load("SignalAnalysis\ROI_boundary.mat");       % load ROI_boundary
+load([FolderPath, OutputFolder, '\ROI_boundary.mat'])       % load ROI_boundary
 
 
 %% RUN CODE

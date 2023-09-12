@@ -1,5 +1,20 @@
 function plot_raw_signal(visibility,ca_signal,nuc_signal,n_frames,mean_dist,exposure_time,output_path)
-    figure('Visible',visibility);
+% PLOT_RAW_SIGNAL plots the raw nuclear and calcium signals with varying
+% x-axis and saves them
+% ------------------
+% Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
+% Email:    raymond.zhang@monash.edu
+% Updated:  2023-09-12
+% ------INPUTS------
+% visibility (str):         Indicates whether figures should be displayed
+% ca_signal (arr):          Calcium signal
+% nuc_signal (str):         Nuclear signal
+% n_frames (double):        Number of frames to be used for analysis
+% mean_dist (double):       Average number of frames between cycles
+% exposure_time (double):   Duration in ms that a frame is exposed for
+% output_path (str):        Folder to save images in
+% -----OUTPUTS-----
+figure('Visible',visibility);
     hold on
     plot(0:1:(n_frames-1)*1, ca_signal, 'g');
     plot(0:1:(n_frames-1)*1, nuc_signal, 'm');

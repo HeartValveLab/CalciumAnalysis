@@ -1,4 +1,4 @@
-function save_settings(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase, NumScales, MinPeakHeight, MinPeakProminence, ROI, Padding, CheckNeighbours, OutputName)
+function save_phase_matching(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase, NumScales, MinPeakHeight, MinPeakProminence, ROI, Padding, CheckNeighbours, OutputName)
     %% Save settings
     folder_w = [FolderPath, OutputName];
     fid = fopen([folder_w, '\PhaseMatchingSession_', datestr(now, 'ddmmyyyy_HHMMSS'), '.m'], 'wt' );

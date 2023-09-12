@@ -1,10 +1,23 @@
-function save_multitiff(N_pks, N_channels, cutLength, ImagesToSave, outputFileName, folder_w)
-for k3 = 1:2*cutLength+1
-    for k2 = 1:N_pks-1
-        for ch = 1:N_channels
-            ImageFile=[outputFileName '_t' padnumber(3,num2str(k2)) '_z' padnumber(3,num2str(k3)) '_c00' num2str(ch) '.tif'];
-            imwrite(ImagesToSave{ch,k2,k3}, [folder_w,filesep,ImageFile],'tif')
+function save_multitiff(n_pks, n_channels, cut_length, images_to_save, output_path)
+% SAVE_SINGLE_PHASE saves a tif containing phase matched frames for target
+% phase
+% ------------------
+% Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
+% Email:    raymond.zhang@monash.edu
+% Updated:  2023-09-12
+% ------INPUTS------
+% n_pks (double):       Number of peaks found
+% n_channels (double):  Number of input channels used
+% cut_length (double):  Number of frames to keep on either side of peak
+% images_to_save (cell):Data object to save phase matched images
+% output_path (str):    Full path to output folder
+% -----OUTPUTS-----
+    for matched_phase = 1:2*cut_length+1
+        for cycle = 1:n_pks-1
+            for channel = 1:n_channels
+                ImageFile=['MultiTiff_t' padnumber(3,num2str(cycle)) '_z' padnumber(3,num2str(matched_phase)) '_c00' num2str(channel) '.tif'];
+                imwrite(images_to_save{channel,cycle,matched_phase}, [output_path,filesep,ImageFile],'tif')
+            end
         end
     end
-end
 end

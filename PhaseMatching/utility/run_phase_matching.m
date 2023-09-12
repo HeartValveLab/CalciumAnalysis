@@ -1,8 +1,8 @@
-function phase_matching_script(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase, NumScales, MinPeakHeight, MinPeakProminence, Padding, ROI, CheckNeighbours, OutputName, Output)
+function run_phase_matching(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase, NumScales, MinPeakHeight, MinPeakProminence, Padding, ROI, CheckNeighbours, OutputName, Output)
     %% Initiation
     disp('Initiating inputs');
     
-    [pathnames, N_channels, pathnameChMain, tifInfo, img_ref] = initialise(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase);
+    [pathnames, N_channels, pathnameChMain, tifInfo, img_ref] = initialise_phase_matching(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase);
     % figure(1);
     % imshow(img_ref);
     % title('This is our reference image for phase matching')

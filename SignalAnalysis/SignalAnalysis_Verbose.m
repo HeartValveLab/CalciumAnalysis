@@ -26,7 +26,7 @@ disp('User inputs read');
 
 %% Initiation
 disp('Processing user inputs');
-[FilePaths, OutputPath, TifInfo, N_frames, N_channels, EndFrame] = initialise( ...
+[FilePaths, OutputPath, TifInfo, N_frames, N_channels, EndFrame] = initialise_signal_analysis( ...
     FolderPath, FileNameNucCh, FileNameCaCh, StartFrame, EndFrame, OutputFolder);
 disp('User inputs processed')
 
@@ -45,24 +45,24 @@ disp('Overlay complete')
 disp('Creating region of interest')
 NucOverlay = mat2gray(OverlayedImages{1});
 CaOverlay = mat2gray(OverlayedImages{2});
-fusedChannel = imfuse(CaOverlay, NucOverlay);
+FusedChannel = imfuse(CaOverlay, NucOverlay);
 
 switch visibility
     case 'on'
-        imshow(fusedChannel)
+        imshow(FusedChannel)
         axis on;
         title('Do not close this figure window till end of script!', 'FontSize', 16);
         message = sprintf('Left click and hold to begin drawing.\nSimply lift the mouse button to finish');
         uiwait(msgbox(message));
         hFH = imfreehand();
         ROI_boundary = hFH.createMask();
-        save("ROI_boundary.mat","ROI_boundary")
+        save([OutputPath, filesep, 'ROI_boundary.mat'],"ROI_boundary")
         close();
-    case 'off'
-        load("ROI_boundary.mat")
+    case 'off'       
+        load([FolderPath, OutputFolder, '\ROI_boundary.mat'])
 end
 
-save_ROI(fusedChannel, ROI_boundary, OutputPath)
+save_ROI(FusedChannel, ROI_boundary, OutputPath)
 disp('Region of interest saved')
 
 
