@@ -1,4 +1,17 @@
 function plot_normalised_signal(visibility,normalised_signal,n_frames,mean_dist,exposure_time,output_path)
+% PLOT_NORMALISED_SIGNAL plots the normalised calcium signal
+% ------------------
+% Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
+% Email:    raymond.zhang@monash.edu
+% Updated:  2023-09-12
+% ------INPUTS------
+% visibility (str):         Indicates whether figures should be displayed
+% normalised_signal (arr):  Calcium signal normalised to nuclear background
+% n_frames (double):        Number of frames to be used for analysis
+% mean_dist (double):       Average number of frames between cycles
+% exposure_time (double):   Duration in ms that a frame is exposed for
+% output_path (str):        Folder to save images in
+% -----OUTPUTS-----
     figure('Visible',visibility);
     hold on
     plot(0:1:(n_frames-1)*1, normalised_signal, 'k');
