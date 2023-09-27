@@ -4,7 +4,7 @@
 %
 %  Author: Raymond Zhang
 %  Created: 2023-07-24
-%  Updated: 2023-08-22
+%  Updated: 2023-09-27
 
 close all; clc; clear;
 addpath(genpath('utility'))
@@ -27,17 +27,17 @@ MinPeakProminence = 0.05;
 ROI = [236, 183, 338, 337];     % x_start, y_start, x_end, y_end
 Padding = 3;
 CheckNeighbours = 2;
-visibility = 'on'; % display figures or not
+Visibility = 'on'; % display figures or not
 OutputFolder = 'PhaseMatchingOutput';
 Output = '111';
 
 %% Initiation
-disp('Initiating inputs');
-
+disp('Processing user inputs');
 [FilePaths, N_channels, MainPath, TifInfo, ImgRef] = initialise_phase_matching(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase);
-figure('Visible',visibility);
+figure('Visible',Visibility);
 imshow(ImgRef);
 title('This is our reference image for phase matching')
+disp('User inputs processed')
 
 
 %% Preliminary Phase Matching
@@ -45,10 +45,11 @@ disp('Performing preliminary phase matching');
 [SsimScores, N_Frames] = pre_phase_matching(TifInfo, MainPath, ImgRef, NumScales);
 [Pks, PkLocs, N_pks, MeanDist] = find_peaks(SsimScores, MinPeakHeight, MinPeakProminence, Phase);
 
-figure('Visible',visibility);
+figure('Visible',Visibility);
 plot(1:N_Frames, SsimScores); hold on;
 plot(PkLocs, Pks, "*")
 title(['ssim scores. ', num2str(N_pks), ' peaks found at an average distance of ', num2str(MeanDist)])
+disp('Preliminary phase matching complete')
 
 
 %% ROI Based Phase Matching

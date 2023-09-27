@@ -1,53 +1,52 @@
-function run_phase_matching(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase, NumScales, MinPeakHeight, MinPeakProminence, Padding, ROI, CheckNeighbours, OutputName, Output)
-    %% Initiation
-    disp('Initiating inputs');
+function run_phase_matching(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase, NumScales, MinPeakHeight, MinPeakProminence, Padding, ROI, CheckNeighbours, Visibility, OutputFolder, Output)
+% RUN_PHASE_MATCHING is a header function to run all phase matching code
+% cleanly
+
+    % Initiation
+    disp('Processing user inputs');
+    [FilePaths, N_channels, MainPath, TifInfo, ImgRef] = initialise_phase_matching(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase);
+    figure('Visible',Visibility);
+    imshow(ImgRef);
+    title('This is our reference image for phase matching')
+    disp('User inputs processed')
     
-    [pathnames, N_channels, pathnameChMain, tifInfo, img_ref] = initialise_phase_matching(FolderPath, FilenameCh1, FilenameCh2, FilenameCh3, MainCh, Phase);
-    % figure(1);
-    % imshow(img_ref);
-    % title('This is our reference image for phase matching')
-    
-    
-    %% Preliminary Phase Matching
+    % Preliminary Phase Matching
     disp('Performing preliminary phase matching');
-    [ssim_score_lst, N] = pre_phase_matching(tifInfo, pathnameChMain, img_ref, NumScales);
-    [pks, pk_locs, N_pks] = find_peaks(ssim_score_lst, MinPeakHeight, MinPeakProminence, Phase);
-    mean_dist = mean(diff(pk_locs));
+    [SsimScores, N_Frames] = pre_phase_matching(TifInfo, MainPath, ImgRef, NumScales);
+    [Pks, PkLocs, N_pks, MeanDist] = find_peaks(SsimScores, MinPeakHeight, MinPeakProminence, Phase);
     
-    figure(2);
-    plot(1:N, ssim_score_lst); hold on;
-    plot(pk_locs, pks, "*")
-    title(['ssim scores. ', num2str(N_pks), ' peaks found at an average distance of ', num2str(mean_dist)])
-    
-    
-    %% ROI Based Phase Matching
+    figure('Visible',Visibility);
+    plot(1:N_Frames, SsimScores); hold on;
+    plot(PkLocs, Pks, "*")
+    title(['ssim scores. ', num2str(N_pks), ' peaks found at an average distance of ', num2str(MeanDist)])
+    disp('Preliminary phase matching complete')
+
+    % ROI Based Phase Matching
     disp('Performing advanced phase matching');
-    [cutLength, ImagesToSave] = init_output(pk_locs, Padding, N_channels, N_pks);
+    CutLength = round(MeanDist/2 + Padding);
+    ImagesToSave = cell(N_channels, N_pks,2*CutLength+1);
+    X_bounds = ceil(ROI(1)):floor(ROI(1)+ROI(3));
+    Y_bounds = ceil(ROI(2)):floor(ROI(2)+ROI(4));
+    N_neighbours = CheckNeighbours;
+    ImagesToSave = adv_phase_matching(N_pks, MainPath, X_bounds, Y_bounds, ImgRef, PkLocs, N_neighbours, CutLength, N_channels, TifInfo, ImagesToSave, FilePaths);
+    disp('Advanced phase matching complete')
     
-    xbounds = ceil(ROI(1)):floor(ROI(1)+ROI(3));
-    ybounds = ceil(ROI(2)):floor(ROI(2)+ROI(4));
-    n_neighbours = CheckNeighbours;
-    
-    ImagesToSave = adv_phase_matching(N_pks, pathnameChMain, xbounds, ybounds, Phase, pk_locs, n_neighbours, cutLength, N_channels, tifInfo, ImagesToSave, pathnames);
-    
-    
-    %% Output
+    % Output
     disp('Saving files');
-    outputFolder = OutputName;
-    outputFileName = OutputName;
-    folder_w = [FolderPath, outputFolder];
-    mkdir(folder_w);
+    OutputPath = [FolderPath, OutputFolder];
+    mkdir(OutputPath);
     javaaddpath('loci_tools.jar')
     
     if Output(1) == '1'
-        save_multitiff(N_pks, N_channels, cutLength, ImagesToSave, outputFileName, folder_w)
+        save_multitiff(N_pks, N_channels, CutLength, ImagesToSave, OutputPath)
     end
     
     if Output(2) == '1'
-        save_phase(tifInfo, N_pks, N_channels, cutLength, ImagesToSave, outputFileName, folder_w, Phase);
+        save_single_phase(TifInfo, N_pks, N_channels, CutLength, ImagesToSave, OutputPath, Phase);
     end
     
     if Output(3) == '1'
-        save_all(tifInfo, N_pks, N_channels, cutLength, ImagesToSave, outputFileName, folder_w);
+        save_all_phase(TifInfo, N_pks, N_channels, CutLength, ImagesToSave, OutputPath);
     end
+    disp('Files saved');
 end
