@@ -18,6 +18,6 @@ function ssim_scores = ssim_wrapper(img_ref, tif_path, x_bounds, y_bounds, frame
     for i_frame = frame_idx
         img = imread(tif_path, i_frame);
         ssim_score = multissim3(img_ref(y_bounds,x_bounds), img(y_bounds,x_bounds), NumScales=num_scales);
-        ssim_scores = [ssim_scores, ssim_score];
+        ssim_scores = [ssim_scores; ssim_score];
     end
 end

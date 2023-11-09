@@ -19,12 +19,12 @@ InputData.filename_1 = '0-499-Nuc.tif';
 InputData.filename_2 = '0-499-Ca.tif';   % optional
 InputData.filename_3 = '';               % optional
 InputData.main_ch = 2; % channel to be used for reference
-InputData.phase = 5;  % frame to be used for reference
+InputData.phase = 1;  % frame to be used for reference
 
 InputParams = input_params;
 InputParams.n_scales = 5;
 InputParams.min_peak_height = 0;
-InputParams.min_peak_prominence = 0.05;
+InputParams.min_peak_prominence = 0.03;
 
 InputParams.ROI = [236, 183, 338, 337];     % x_start, y_start, x_end, y_end
 InputParams.padding = 3;
@@ -32,7 +32,7 @@ InputParams.n_neighbours = 2;
 
 Visibility = 'on'; % display figures or not
 OutputFolder = 'PhaseMatchingOutput';
-Output = '111';
+Output = '000';
 
 disp('Inputs initialised');
 
@@ -49,7 +49,7 @@ disp('User inputs processed')
 %% Preliminary Phase Matching
 disp('Performing preliminary phase matching');
 SsimScoresMain = ssim_wrapper(ImgRef, InputData.main_path, 1:InputData.width, 1:InputData.height, 1:InputData.n_frames, InputParams.n_scales);
-[Pks, PkLocs, N_pks, MeanDist] = find_peaks(SsimScoresMain, InputParams.min_peak_height, InputParams.min_peak_prominence, InputData.phase);
+[Pks, PkLocs, N_pks, MeanDist] = find_peaks_v2(SsimScoresMain, InputParams.min_peak_height, InputParams.min_peak_prominence, 0, InputData.phase);
 
 figure('Visible',Visibility);
 plot(1:InputData.n_frames, SsimScoresMain); hold on;
@@ -60,7 +60,14 @@ disp('Preliminary phase matching complete')
 
 %% ROI Based Phase Matching
 disp('Performing advanced phase matching');
-[MatchedFrames, N_pks, MeanDist] = temporal_phase_matching(InputData, InputParams);
+[Pks, MatchedFrames, N_pks, MeanDist, SsimsTotal] = temporal_phase_matching(InputData, InputParams, MeanDist);
+
+figure('Visible',Visibility);
+plot(2:InputData.n_frames-1, SsimsTotal); hold on;
+plot(MatchedFrames, Pks, "*")
+title(['ssim scores. ', num2str(N_pks), ' peaks found at an average distance of ', num2str(MeanDist)])
+disp('Preliminary phase matching complete')
+
 disp('Advanced phase matching complete');
 
 
