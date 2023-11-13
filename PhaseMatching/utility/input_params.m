@@ -17,11 +17,11 @@ classdef input_params
         end
         function xb = x_bounds(obj)
             % X boundaries of ROI
-            xb = ceil(obj.ROI(1)):floor(obj.ROI(1)+obj.ROI(3));
+            xb = ceil(obj.ROI(1)) : floor(obj.ROI(1)+obj.ROI(3));
         end
         function yb = y_bounds(obj)
             % Y boundaries of ROI
-            yb = ceil(obj.ROI(2)):floor(obj.ROI(2)+obj.ROI(4));
+            yb = ceil(obj.ROI(2)) : floor(obj.ROI(2)+obj.ROI(4));
         end
     end
 end

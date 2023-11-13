@@ -18,21 +18,33 @@ InputData.folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\Card
 InputData.filename_1 = '0-499-Nuc.tif';
 InputData.filename_2 = '0-499-Ca.tif';   % optional
 InputData.filename_3 = '';               % optional
-InputData.main_ch = 2; % channel to be used for reference
-InputData.phase = 1;  % frame to be used for reference
+
+% InputData.folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\CardiacCycle_full\';
+% InputData.filename_1 = '0-4499-Nuc.tif';
+% InputData.filename_2 = '0-4499-Ca.tif';   % optional
+% InputData.filename_3 = '';               % optional
+
+% InputData.folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\Cilia\';
+% InputData.filename_1 = 'injured_motile_Rep_8_bit.tif';
+% InputData.filename_2 = '';   % optional
+% InputData.filename_3 = '';               % optional
+
+InputData.main_ch = 1; % channel to be used for reference
+InputData.phase = 15;  % frame to be used for reference
 
 InputParams = input_params;
 InputParams.n_scales = 5;
 InputParams.min_peak_height = 0;
-InputParams.min_peak_prominence = 0.03;
+InputParams.min_peak_prominence = 0.05;
 
 InputParams.ROI = [236, 183, 338, 337];     % x_start, y_start, x_end, y_end
+%InputParams.ROI = [0.5, 0.5, 144, 136];
 InputParams.padding = 3;
 InputParams.n_neighbours = 2;
 
 Visibility = 'on'; % display figures or not
 OutputFolder = 'PhaseMatchingOutput';
-Output = '000';
+Output = '010';
 
 disp('Inputs initialised');
 
@@ -60,13 +72,14 @@ disp('Preliminary phase matching complete')
 
 %% ROI Based Phase Matching
 disp('Performing advanced phase matching');
-[Pks, MatchedFrames, N_pks, MeanDist, SsimsTotal] = temporal_phase_matching(InputData, InputParams, MeanDist);
+% [Pks, MatchedFrames, N_pks, MeanDist, SsimsTotal] = temporal_phase_matching(InputData, InputParams, MeanDist);
+[MatchedFrames] = best_neighbour_phase_matching(InputData, InputParams, PkLocs);
 
-figure('Visible',Visibility);
-plot(2:InputData.n_frames-1, SsimsTotal); hold on;
-plot(MatchedFrames, Pks, "*")
-title(['ssim scores. ', num2str(N_pks), ' peaks found at an average distance of ', num2str(MeanDist)])
-disp('Preliminary phase matching complete')
+% figure('Visible',Visibility);
+% plot(1:InputData.n_frames-1, SsimsTotal); hold on;
+% plot(MatchedFrames, Pks, "*")
+% title(['ssim scores. ', num2str(N_pks), ' peaks found at an average distance of ', num2str(MeanDist)])
+% disp('Preliminary phase matching complete')
 
 disp('Advanced phase matching complete');
 
@@ -84,12 +97,12 @@ mkdir(OutputPath);
 javaaddpath('loci_tools.jar')
 
 if Output(1) == '1'
-    save_multitiff(N_pks, InputData.n_channels, CutLength, ImagesToSave, OutputPath)
+    save_multitiff(InputData, CutLength, ImagesToSave, N_pks, OutputPath)
 end
 if Output(2) == '1'
-    save_single_phase(InputData.tif_info, N_pks, InputData.n_channels, CutLength, ImagesToSave, OutputPath, InputData.phase);
+    save_single_phase(InputData, CutLength, ImagesToSave, N_pks, OutputPath);
 end
 if Output(3) == '1'
-    save_all_phase(InputData.tif_info, N_pks, InputData.n_channels, CutLength, ImagesToSave, OutputPath);
+    save_all_phase(InputData, CutLength, ImagesToSave, N_pks, OutputPath);
 end
 disp('Files saved');

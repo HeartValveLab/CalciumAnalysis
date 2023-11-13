@@ -1,4 +1,4 @@
-function save_all_phase(tif_info, n_pks, n_channels, cut_length, images_to_save, output_path)
+function save_all_phase(input_data, cut_length, images_to_save, n_pks, output_path)
 % SAVE_ALL_PHASE saves a tif containing phase matched frames for target
 % phase and neighbouring
 % ------------------
@@ -15,8 +15,8 @@ function save_all_phase(tif_info, n_pks, n_channels, cut_length, images_to_save,
 % phase (double):       Frame to use as reference
 % -----OUTPUTS-----
     cycle_length = 2*cut_length+1;
-    im = zeros(tif_info(1).Height,tif_info(1).Width, n_pks,n_channels,cycle_length,'uint8'); %change to uint16 if using 16 bit images   
-    for ch = 1:n_channels
+    im = zeros(input_data.height,input_data.width, n_pks, input_data.n_channels,cycle_length,input_data.data_format); %change to uint16 if using 16 bit images   
+    for ch = 1:input_data.n_channels
         for cycle = 1:n_pks-1
             for matched_phase = 1:cycle_length
                 im(:,:,cycle,ch,matched_phase) = images_to_save{ch,cycle,matched_phase};

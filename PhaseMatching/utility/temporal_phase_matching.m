@@ -20,7 +20,18 @@ function [pks, matched_frames, n_pks, mean_dist, ssims_total] = temporal_phase_m
             ssims_main = ssim_wrapper(img_ref, input_data.main_path, input_params.x_bounds, input_params.y_bounds, 1:input_data.n_frames, input_params.n_scales);
             ssims_after = ssim_wrapper(img_after, input_data.main_path, input_params.x_bounds, input_params.y_bounds, 1:input_data.n_frames, input_params.n_scales);
             ssims_total = ssims_main(1:end-1) + 0.7*ssims_after(2:end);
-            [pks, pk_locs, n_pks, mean_dist] = find_peaks_v2(ssims_total, 0*input_params.min_peak_height, 0*input_params.min_peak_prominence, 0.75*mean_dist, input_data.phase);
+            [pks, pk_locs, n_pks, mean_dist] = find_peaks_v2(ssims_total, input_params.min_peak_height, input_params.min_peak_prominence, 0.75*mean_dist, input_data.phase);
+            matched_frames = pk_locs;
+        case 2
+            img_ref = input_data.get_img;
+            img_before = input_data.get_img(input_data.phase-1);
+            img_after = input_data.get_img(input_data.phase+1);
+            ssims_main = ssim_wrapper(img_ref, input_data.main_path, input_params.x_bounds, input_params.y_bounds, 1:input_data.n_frames, input_params.n_scales);
+            ssims_before = ssim_wrapper(img_before, input_data.main_path, input_params.x_bounds, input_params.y_bounds, 1:input_data.n_frames, input_params.n_scales);
+            ssims_after = ssim_wrapper(img_after, input_data.main_path, input_params.x_bounds, input_params.y_bounds, 1:input_data.n_frames, input_params.n_scales);
+            ssims_total = 0.7*ssims_before(1:end-2) + ssims_main(2:end-1) + 0.7*ssims_after(3:end);
+            ssims_total = [min(ssims_total); ssims_total];
+            [pks, pk_locs, n_pks, mean_dist] = find_peaks_v2(ssims_total, input_params.min_peak_height, input_params.min_peak_prominence, 0.75*mean_dist, input_data.phase);
             matched_frames = pk_locs;
         otherwise 
             img_ref = input_data.get_img;
@@ -30,7 +41,8 @@ function [pks, matched_frames, n_pks, mean_dist, ssims_total] = temporal_phase_m
             ssims_before = ssim_wrapper(img_before, input_data.main_path, input_params.x_bounds, input_params.y_bounds, 1:input_data.n_frames, input_params.n_scales);
             ssims_after = ssim_wrapper(img_after, input_data.main_path, input_params.x_bounds, input_params.y_bounds, 1:input_data.n_frames, input_params.n_scales);
             ssims_total = 0.7*ssims_before(1:end-2) + ssims_main(2:end-1) + 0.7*ssims_after(3:end);
-            [pks, pk_locs, n_pks, mean_dist] = find_peaks_v2([0;ssims_total], 0*input_params.min_peak_height, 0*input_params.min_peak_prominence, 0.75*mean_dist, input_data.phase);
+            ssims_total = [ssims_total(1); ssims_total];
+            [pks, pk_locs, n_pks, mean_dist] = find_peaks_v2(ssims_total, input_params.min_peak_height, input_params.min_peak_prominence, 0.75*mean_dist, input_data.phase);
             matched_frames = pk_locs;
     end
 end

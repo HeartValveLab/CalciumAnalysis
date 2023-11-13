@@ -70,5 +70,10 @@ classdef input_data
             ti = obj.tif_info;
             w = ti(1).Width;
         end
+        function df = data_format(obj)
+            ti = obj.tif_info;
+            bits = ti(1).BitsPerSample;
+            df = ['uint', num2str(bits)];
+        end
     end
 end
