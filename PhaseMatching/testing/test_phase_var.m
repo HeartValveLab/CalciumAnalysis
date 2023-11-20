@@ -1,12 +1,7 @@
-%% %% Phase Matching
-%  A script version of the Phase Matching GUI app. It allows users run the
-%  automatic version of the code when the dataset is large on a HPC.
-%
-%  Author: Raymond Zhang
-%  Created: 2023-07-24
-%  Updated: 2023-11-01
-
-% close all; clc; clear;
+function message = test_phase_var(phase)
+% TEST_PHASE_VAR is a header function to allow for testing of different
+% phases. Simply copy over any new code and run test to ensure code does
+% not break for different phases.
 addpath(genpath('utility'))
 
 
@@ -30,7 +25,7 @@ InputData.filename_3 = '';               % optional
 % InputData.filename_3 = '';               % optional
 
 InputData.main_ch = 1; % channel to be used for reference
-InputData.phase = 15;  % frame to be used for reference
+InputData.phase = phase;  % frame to be used for reference
 
 InputParams = input_params;
 InputParams.n_scales = 5;
@@ -72,8 +67,8 @@ disp('Preliminary phase matching complete')
 
 %% ROI Based Phase Matching
 disp('Performing advanced phase matching');
-% [Pks, MatchedFrames, N_pks, MeanDist, SsimsTotal] = temporal_phase_matching(InputData, InputParams, MeanDist);
-[MatchedFrames] = best_neighbour_phase_matching(InputData, InputParams, PkLocs);
+[Pks, MatchedFrames, N_pks, MeanDist, SsimsTotal] = temporal_phase_matching(InputData, InputParams, MeanDist);
+%[MatchedFrames] = best_neighbour_phase_matching(InputData, InputParams, PkLocs);
 
 % figure('Visible',Visibility);
 % plot(1:InputData.n_frames-1, SsimsTotal); hold on;
@@ -106,3 +101,10 @@ if Output(3) == '1'
     save_all_phase(InputData, CutLength, ImagesToSave, N_pks, OutputPath);
 end
 disp('Files saved');
+
+
+
+%% DO NOT REMOVE
+close all; % optional
+message = "Test ran to completion";
+end
