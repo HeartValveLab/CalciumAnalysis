@@ -1,4 +1,4 @@
-function [matched_frames] = best_neighbour_phase_matching(input_data, input_params, pk_locs)
+function [matched_frames, mean_dist] = best_neighbour_phase_matching(input_data, input_params, pk_locs)
 % BEST_NEIGHBOUR_PHASE_MATCHING determines the phase matched frame based on
 % the highest ssim for a region of interest
 % ------------------
@@ -22,4 +22,5 @@ function [matched_frames] = best_neighbour_phase_matching(input_data, input_para
             matched_frames(i_pk) = pk_locs(i_pk) + max_ssim_loc - input_params.n_neighbours - 1;
         end
     end
+    mean_dist = mean(diff(matched_frames));
 end
