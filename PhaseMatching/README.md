@@ -25,42 +25,43 @@ similarity scores within some threshold of the peak.
 
 ### Loading GUI
 1. Setting up with a clone of this repository
-    a. Open MATLAB
-    b. Navigate to the folder you cloned this repository to
-    c. On the file explorer panel to the left, right click on PhaseMatching and add it to path
-    d. Type in the command prompt `PhaseMatching_App` to open phase matching GUI
+    1. Open MATLAB
+    2. Navigate to the folder you cloned this repository to
+    3. On the file explorer panel to the left, right click on PhaseMatching and add it to path
+    4. Type in the command prompt `PhaseMatching_App` to open phase matching GUI
 2. Or setting up with a copy of PhaseMatching.exe
-    a. Run the PhaseMatching.exe installer
-    b. Follow prompts for installation
-    c. Run the installed application
+    1. Run the PhaseMatching.exe installer
+    2. Follow prompts for installation
+    3. Run the installed application
 
 ### Using GUI
 1. Initiate the input files and select a reference frame to match
-    a. `Browse` for your working directory with the input tiff files
-    b. `Browse` for your input tiff files - the code supports up to three channels
-    c. Select the channel to be used for phase matching
-    d. Select the frame to be used as a reference for phase matching
-    e. Click `Set` to lock in variables and verify output figure to be used as reference
+    1. `Browse` for your working directory with the input tiff files
+    2. `Browse` for your input tiff files - the code supports up to three channels
+    3. Select the channel to be used for phase matching
+    4. Select the frame to be used as a reference for phase matching
+    5. Click `Set` to lock in variables and verify output figure to be used as reference
 2. Perform a preliminary phase match
-    a. Click `Run` to perform phase matching on whole image. The `NumScales` parameter can be tuned depending on input file size
-    b. Click `Find Peaks` to determine the location of the phase matched frames. `MinPeakHeight` and `MinPeakProminence` can be tuned if the user wishes to detect more or less peaks
-    c. Verify with the figure that all relevant peaks have been detected
+    1. Click `Run` to perform phase matching on whole image. The `NumScales` parameter can be tuned depending on input file size
+    2. Click `Find Peaks` to determine the location of the phase matched frames. `MinPeakHeight` and `MinPeakProminence` can be tuned if the user wishes to detect more or less peaks
+    3. Verify with the figure that all relevant peaks have been detected
 3. Perform a region-specific phase matching
-    a. Select either temporal, spatial, or hybrid correction option
-        i. Temporal considers the sequential order of neighbouring frames
-        ii. Spatial picks the best neighbour
-        iii. Hybrid allows the user to choose for close calls within a threshold
-    b. Indicate the number of additional frames to pad the time sequence with
-    c. If using spatial correction, specify the number of neighbours around the peak to be checked
-    d. If using hybrid correction, specify the threshold for requiring manual input. NOTE: the lower the value, the more manual correction that may need to be done
-    e. After pressing `Run`, you will be required to draw a region of interest for the phase matching algorithm to target
-    f. If you selected the hybrid option, you will also be required to manually correct by selecting on the pop up menu which image you think matches the reference better
+    1. Select either temporal, spatial, or hybrid correction option
+        1. Temporal considers the sequential order of neighbouring frames
+        2. Spatial picks the best neighbour
+        3. Hybrid allows the user to choose for close calls within a threshold
+    2. Indicate the number of additional frames to pad the time sequence with
+    3. If using spatial correction, specify the number of neighbours around the peak to be checked
+    4. If using hybrid correction, specify the threshold for requiring manual input. NOTE: the lower the value, the more manual correction that may need to be done
+    5. After pressing `Run`, you will be required to draw a region of interest for the phase matching algorithm to target
+    6. If you selected the hybrid option, you will also be required to manually correct by selecting on the pop up menu which image you think matches the reference better
 4. Save output
-    a. Select the output file type
-        i. Individual tifs saves each frame as a separate tif file
-        ii. Single phase saves only the phase you are interested in
-        iii. All saves the phase of interest with some padding
-        iv. Session settings allows you to easily rerun code in a script
+    1. Select the output file type
+        1. Individual tifs saves each frame as a separate tif file
+        2. Single phase saves only the phase you are interested in
+        3. All saves the phase of interest with some padding
+        4. Session settings allows you to easily rerun code in a script
+    2. Click `Save`
     
 ### Script
 1. Clone this repository
@@ -74,7 +75,7 @@ mat PhaseMatching_script
 ```
 
 ## TODO:
-- [ ] BUG: Some tif images not displaying
+- [x] BUG: Some tif images not displaying - not code problem, dataset not scaled properly
 - [x] TEST: New datasets on USB
 - [ ] TEST: New datasets on OneDrive
 - [ ] REVISE: Save session settings needs to reflect new code
@@ -83,3 +84,4 @@ mat PhaseMatching_script
 - [ ] FEATURE: Allow users to save after preliminary
 - [ ] FEATURE: Check to prevent overwrite files
 - [x] DOCUMENT: How to use in README.md
+- [ ] RELEASE: Package GUI for release

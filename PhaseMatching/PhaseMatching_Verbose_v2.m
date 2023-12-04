@@ -13,24 +13,29 @@ addpath(genpath('utility'))
 %% USERS INPUTS
 disp('Initialising inputs');
 
-InputData = input_data;
-InputData.folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\CardiacCycle\';
-InputData.filename_1 = '0-499-Nuc.tif';
-InputData.filename_2 = '0-499-Ca.tif';   % optional
-InputData.filename_3 = '';               % optional
+% InputData = input_data;
+% InputData.folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\CardiacCycle\';
+% InputData.filename_1 = '0-499-Nuc.tif';
+% InputData.filename_2 = '0-499-Ca-uint16.tif';   % optional
+% InputData.filename_3 = '';               % optional
 
 InputData.folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\HajimeUSB\UseForTesting\';
 InputData.filename_1 = 'SingleFile-Ch1.tif';
 InputData.filename_2 = 'SingleFile-Ch2.tif';   % optional
 InputData.filename_3 = '';               % optional
 
+% InputData.folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\CardiacCycle_full\';
+% InputData.filename_1 = '0-4499-Nuc.tif';
+% InputData.filename_2 = '0-4499-Ca.tif';   % optional
+% InputData.filename_3 = '';               % optional
+% 
 % InputData.folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\Cilia\';
 % InputData.filename_1 = 'injured_motile_Rep_8_bit.tif';
 % InputData.filename_2 = '';   % optional
 % InputData.filename_3 = '';               % optional
 
-InputData.main_ch = 1; % channel to be used for reference
-InputData.phase = 5;  % frame to be used for reference
+InputData.main_ch = 2; % channel to be used for reference
+InputData.phase = 15;  % frame to be used for reference
 
 InputParams = input_params;
 InputParams.n_scales = 5;
