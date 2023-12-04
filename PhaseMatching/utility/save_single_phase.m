@@ -1,4 +1,4 @@
-function save_single_phase(tif_info, n_pks, n_channels, cut_length, images_to_save, output_path, phase)
+function save_single_phase(input_data, cut_length, images_to_save, n_pks, output_path)
 % SAVE_SINGLE_PHASE saves a tif containing phase matched frames for target
 % phase
 % ------------------
@@ -14,13 +14,13 @@ function save_single_phase(tif_info, n_pks, n_channels, cut_length, images_to_sa
 % output_path (str):    Full path to output folder
 % phase (double):       Frame to use as reference
 % -----OUTPUTS-----
-    im = zeros(tif_info(1).Height,tif_info(1).Width, n_pks-1,n_channels,1,'uint8'); %change to uint16 if using 16 bit images
+    im = zeros(input_data.height,input_data.width, n_pks-1,input_data.n_channels,1,input_data.data_format); %change to uint16 if using 16 bit images
     centre = cut_length + 1; 
-    for channel = 1:n_channels
+    for channel = 1:input_data.n_channels
         for matched_phase = 1:n_pks-1
             im(:,:,matched_phase,channel,1) = images_to_save{channel,matched_phase,centre};
         end
     end
-    ImageFile=['SinglePhase_z' padnumber(3,num2str(phase)) '.ome'];
+    ImageFile=['SinglePhase_z' padnumber(3,num2str(input_data.phase)) '.ome'];
     bfsave(im, [output_path,filesep,ImageFile])
 end
