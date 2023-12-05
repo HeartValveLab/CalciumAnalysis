@@ -82,6 +82,6 @@ mat PhaseMatching_script
 - [ ] REVISE: Outdated functions need removal
 - [ ] REVISE: Manual correction GUI information
 - [ ] FEATURE: Allow users to save after preliminary
-- [ ] FEATURE: Check to prevent overwrite files
+- [x] FEATURE: Check to prevent overwrite files
 - [x] DOCUMENT: How to use in README.md
 - [ ] RELEASE: Package GUI for release

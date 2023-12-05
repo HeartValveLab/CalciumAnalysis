@@ -24,5 +24,5 @@ function save_all_phase(input_data, cut_length, images_to_save, n_pks, output_pa
         end
     end
     ImageFile = ['AllPhase.ome'];
-    bfsave(im, [output_path, filesep, ImageFile])
+    bfsave(im, [output_path,filesep,ImageFile])
 end
