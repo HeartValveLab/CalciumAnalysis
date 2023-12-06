@@ -78,7 +78,7 @@ mat PhaseMatching_script
 - [x] BUG: Some tif images not displaying - not code problem, dataset not scaled properly
 - [x] TEST: New datasets on USB
 - [ ] TEST: New datasets on OneDrive
-- [ ] REVISE: Save session settings needs to reflect new code
+- [x] REVISE: Save session settings needs to reflect new code
 - [ ] REVISE: Outdated functions need removal
 - [ ] REVISE: Manual correction GUI information
 - [ ] REVISE: GUI unused variables
