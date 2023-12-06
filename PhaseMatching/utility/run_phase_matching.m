@@ -5,7 +5,8 @@ function run_phase_matching(InputData, InputParams, Visibility, OutputFolder, Ou
     % Initiation
     disp('Processing user inputs');
     ImgRef = InputData.get_img;
-    figure('Visible',Visibility);
+    f1 = figure(1);
+    f1.Visible = Visibility;
     imshow(ImgRef);
     title('This is our reference image for phase matching')
     disp('User inputs processed')
@@ -13,11 +14,12 @@ function run_phase_matching(InputData, InputParams, Visibility, OutputFolder, Ou
     % Preliminary Phase Matching
     disp('Performing preliminary phase matching');
     SsimScoresMain = ssim_wrapper(ImgRef, InputData.main_path, 1:InputData.width, 1:InputData.height, 1:InputData.n_frames, InputParams.n_scales);
-    [Pks, PkLocs, N_pks, MeanDist] = find_peaks_v2(SsimScoresMain, InputParams.min_peak_height, InputParams.min_peak_prominence, 0, InputData.phase);
+    [Pks, MatchedFrames, N_pks, MeanDist] = find_peaks_v2(SsimScoresMain, InputParams.min_peak_height, InputParams.min_peak_prominence, 0, InputData.phase);
     
-    figure('Visible',Visibility);
+    f2 = figure(2);
+    f2.Visible = Visibility;
     plot(1:InputData.n_frames, SsimScoresMain); hold on;
-    plot(PkLocs, Pks, "*")
+    plot(MatchedFrames, Pks, "*")
     title(['ssim scores. ', num2str(N_pks), ' peaks found at an average distance of ', num2str(MeanDist)])
     disp('Preliminary phase matching complete')
 
@@ -37,13 +39,21 @@ function run_phase_matching(InputData, InputParams, Visibility, OutputFolder, Ou
     javaaddpath('loci_tools.jar')
     
     if Output(1) == '1'
-        save_multitiff(InputData, CutLength, ImagesToSave, N_pks, OutputPath)
+        save_multitiff(InputData, CutLength, ImagesToSave, N_pks, OutputPath);
     end
     if Output(2) == '1'
-        save_single_phase(InputData, CutLength, ImagesToSave, N_pks, OutputPath);
+        ImageFile=['SinglePhase_z' padnumber(3,num2str(InputData.phase)) '.ome'];
+        if isfile([OutputPath,filesep,ImageFile])
+            disp('File already exists. Overwrite prevented. Consider renaming original file.')
+        else
+            save_single_phase(InputData, CutLength, ImagesToSave, N_pks, OutputPath);
+        end
     end
     if Output(3) == '1'
-        save_all_phase(InputData, CutLength, ImagesToSave, N_pks, OutputPath);
+        ImageFile = ['AllPhase.ome'];
+        if isfile([OutputPath,filesep,ImageFile])
+            disp('File already exists. Overwrite prevented. Consider renaming original file')
+        else
+            save_all_phase(InputData, CutLength, ImagesToSave, N_pks, OutputPath);
+        end
     end
-    disp('Files saved');
-end
