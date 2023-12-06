@@ -67,12 +67,12 @@ disp('User inputs processed')
 %% Preliminary Phase Matching
 disp('Performing preliminary phase matching');
 SsimScoresMain = ssim_wrapper(ImgRef, InputData.main_path, 1:InputData.width, 1:InputData.height, 1:InputData.n_frames, InputParams.n_scales);
-[Pks, PkLocs, N_pks, MeanDist] = find_peaks_v2(SsimScoresMain, InputParams.min_peak_height, InputParams.min_peak_prominence, 0, InputData.phase);
+[Pks, MatchedFrames, N_pks, MeanDist] = find_peaks_v2(SsimScoresMain, InputParams.min_peak_height, InputParams.min_peak_prominence, 0, InputData.phase);
 
 f2 = figure(2);
 f2.Visible = Visibility;
 plot(1:InputData.n_frames, SsimScoresMain); hold on;
-plot(PkLocs, Pks, "*")
+plot(MatchedFrames, Pks, "*")
 title(['ssim scores. ', num2str(N_pks), ' peaks found at an average distance of ', num2str(MeanDist)])
 disp('Preliminary phase matching complete')
 
@@ -80,7 +80,7 @@ disp('Preliminary phase matching complete')
 %% ROI Based Phase Matching
 disp('Performing advanced phase matching');
 % [Pks, MatchedFrames, N_pks, MeanDist, SsimsTotal] = temporal_phase_matching(InputData, InputParams, MeanDist);
-[MatchedFrames] = best_neighbour_phase_matching(InputData, InputParams, PkLocs);
+[MatchedFrames] = best_neighbour_phase_matching(InputData, InputParams, MatchedFrames);
 
 % figure('Visible',Visibility);
 % plot(1:InputData.n_frames-1, SsimsTotal); hold on;

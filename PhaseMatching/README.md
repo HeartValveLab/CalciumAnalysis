@@ -81,7 +81,8 @@ mat PhaseMatching_script
 - [ ] REVISE: Save session settings needs to reflect new code
 - [ ] REVISE: Outdated functions need removal
 - [ ] REVISE: Manual correction GUI information
-- [ ] FEATURE: Allow users to save after preliminary
+- [ ] REVISE: GUI unused variables
+- [x] FEATURE: Allow users to save after preliminary
 - [x] FEATURE: Check to prevent overwrite files
 - [x] DOCUMENT: How to use in README.md
 - [ ] RELEASE: Package GUI for release
