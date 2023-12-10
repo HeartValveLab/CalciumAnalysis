@@ -56,7 +56,7 @@ disp('User inputs processed')
 %% Preliminary Phase Matching
 disp('Performing preliminary phase matching');
 SsimScoresMain = ssim_wrapper(ImgRef, InputData.main_path, 1:InputData.width, 1:InputData.height, 1:InputData.n_frames, InputParams.n_scales);
-[Pks, PkLocs, N_pks, MeanDist] = find_peaks_v2(SsimScoresMain, InputParams.min_peak_height, InputParams.min_peak_prominence, 0, InputData.phase);
+[Pks, PkLocs, N_pks, MeanDist] = find_peaks(SsimScoresMain, InputParams.min_peak_height, InputParams.min_peak_prominence, 0, InputData.phase);
 
 figure('Visible',Visibility);
 plot(1:InputData.n_frames, SsimScoresMain); hold on;

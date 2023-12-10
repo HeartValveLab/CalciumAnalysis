@@ -1,9 +1,9 @@
-function [pks, pk_locs, n_pks, mean_dist] = find_peaks(ssim_score_lst, min_peak_height, min_peak_prom, phase)
+function [pks, pk_locs, n_pks, mean_dist] = find_peaks(ssim_score_lst, min_peak_height, min_peak_prom, min_peak_dist, phase)
 % FIND_PEAKS finds the list of peaks from the similarity scores
 % ------------------
 % Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
 % Email:    raymond.zhang@monash.edu
-% Updated:  2023-09-12
+% Updated:  2023-11-09
 % ------INPUTS------
 % ssim_score_lst (arr):     List of similarity scores
 % min_peak_height (double): Adjustable parameter for findpeaks
@@ -15,6 +15,7 @@ function [pks, pk_locs, n_pks, mean_dist] = find_peaks(ssim_score_lst, min_peak_
 % n_pks (arr):              Number of peaks found
 % mean_dist (double):       Average number of frames between peaks
     [pks, pk_locs] = findpeaks(ssim_score_lst, ...
+        MinPeakDistance = min_peak_dist, ...
         MinPeakHeight = min_peak_height, ...
         MinPeakProminence = min_peak_prom);
     if phase == 1
