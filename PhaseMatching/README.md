@@ -26,13 +26,14 @@ similarity scores within some threshold of the peak.
 ### Loading GUI
 1. Setting up with a clone of this repository
     1. Open MATLAB
-    2. Navigate to the folder you cloned this repository to
+    2. Navigate to the folder you cloned this repository to or downloaded the release
     3. On the file explorer panel to the left, right click on PhaseMatching and add it to path
     4. Type in the command prompt `PhaseMatching_App` to open phase matching GUI
 2. Or setting up with a copy of PhaseMatching.exe
-    1. Run the PhaseMatching.exe installer
-    2. Follow prompts for installation
-    3. Run the installed application
+    1. Go to the release page of the original repository and download the MyAppInstaller_mcr.exe
+    2. Run the PhaseMatching.exe installer
+    3. Follow prompts for installation
+    4. Navigate to installation folder and run `PhaseMatching` application
 
 ### Using GUI
 1. Initiate the input files and select a reference frame to match
@@ -63,6 +64,13 @@ similarity scores within some threshold of the peak.
         4. Session settings allows you to easily rerun code in a script
     2. Click `Save`
     
+### Creating standalone application
+1. In the GUI click on `Share` then `Standalone Desktop App`
+2. Select `Runtime included in package`
+3. Adjust any meta-information
+4. `Package`
+5. Once created, drag MyAppInstaller_mcr.exe under for_redistribution into release page of Github
+
 ### Script
 1. Clone this repository
 2. Open in MATLAB and folder to path
@@ -78,11 +86,15 @@ mat PhaseMatching_script
 - [x] BUG: Some tif images not displaying - not code problem, dataset not scaled properly
 - [x] TEST: New datasets on USB
 - [ ] TEST: New datasets on OneDrive
+- [ ] TEST: Dataset in vault and shared drive
 - [x] REVISE: Save session settings needs to reflect new code
 - [x] REVISE: Outdated functions need removal
 - [x] REVISE: Manual correction GUI information
 - [x] REVISE: GUI unused variables
+- [ ] REVISE: Remove preliminary from quiet since we want it to run quickly
 - [x] FEATURE: Allow users to save after preliminary
 - [x] FEATURE: Check to prevent overwrite files
 - [x] DOCUMENT: How to use in README.md
-- [ ] RELEASE: Package GUI for release
+- [x] RELEASE: Package GUI for release (test release done)
+- [ ] CHECK: Instructions are easy to follow
+- [ ] WRITE: Paper for protocol
