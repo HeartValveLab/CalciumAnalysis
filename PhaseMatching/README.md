@@ -79,9 +79,9 @@ mat PhaseMatching_script
 - [x] TEST: New datasets on USB
 - [ ] TEST: New datasets on OneDrive
 - [x] REVISE: Save session settings needs to reflect new code
-- [ ] REVISE: Outdated functions need removal
-- [ ] REVISE: Manual correction GUI information
-- [ ] REVISE: GUI unused variables
+- [x] REVISE: Outdated functions need removal
+- [x] REVISE: Manual correction GUI information
+- [x] REVISE: GUI unused variables
 - [x] FEATURE: Allow users to save after preliminary
 - [x] FEATURE: Check to prevent overwrite files
 - [x] DOCUMENT: How to use in README.md
