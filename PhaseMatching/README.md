@@ -87,14 +87,18 @@ mat PhaseMatching_script
 - [x] TEST: New datasets on USB
 - [ ] TEST: New datasets on OneDrive
 - [ ] TEST: Dataset in vault and shared drive
+- [x] TEST: Automate testing
 - [x] REVISE: Save session settings needs to reflect new code
 - [x] REVISE: Outdated functions need removal
 - [x] REVISE: Manual correction GUI information
 - [x] REVISE: GUI unused variables
-- [ ] REVISE: Remove preliminary from quiet since we want it to run quickly
+~~- [ ] REVISE: Remove preliminary from quiet since we want it to run quickly~~Dependency for advanced phase matching
 - [x] FEATURE: Allow users to save after preliminary
 - [x] FEATURE: Check to prevent overwrite files
+- [ ] FEATURE: Display find peaks for advanced phase matching
+- [ ] FEATURE: Flexible support of datatypes or enforce user???
+- [ ] FEATURE: Deal with original file rather than requiring split or function to split
 - [x] DOCUMENT: How to use in README.md
 - [x] RELEASE: Package GUI for release (test release done)
 - [ ] CHECK: Instructions are easy to follow
-- [ ] WRITE: Paper for protocol
+- [ ] WRITE: Paper for protocol (BioProtocol?)

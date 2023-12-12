@@ -10,78 +10,96 @@ classdef PhaseMatching_Testing < matlab.unittest.TestCase
 
     methods (Test)
         % Test methods
-        function run_phase_1(testCase)
+        function test_phase_1(testCase)
             actSol = test_phase_var(1);
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol);
         end
-        function run_phase_2(testCase)
-            actSol = test_phase_var(2);
+        function test_renee_select(testCase)
+            folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Renee_Selection\';
+            filename_1 = '2023-09-22_NewTest.tif';
+            filename_2 = '';
+            actSol = test_file(folder_path, filename_1, filename_2);
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol);
         end
-        function run_phase_3(testCase)
-            actSol = test_phase_var(3);
+        function test_tf_1(testCase)
+            folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_1\';
+            filename_1 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP_fishFaceLeft_seq-01-1.tif';
+            filename_2 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP_fishFaceLeft_seq-01-2.tif';
+            actSol = test_file(folder_path, filename_1, filename_2);
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol);
         end
-        function run_phase_4(testCase)
-            actSol = test_phase_var(4);
+        function test_tf_2(testCase)
+            folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_2\';
+            filename_1 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP_fishFaceLeft-03-1.tif';
+            filename_2 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP_fishFaceLeft-03-2.tif';
+            actSol = test_file(folder_path, filename_1, filename_2);
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol);
         end
-        function run_phase_5(testCase)
-            actSol = test_phase_var(5);
+        function test_tf_3(testCase)
+            folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_3\';
+            filename_1 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP_fishFaceRight_seq-02-1.tif';
+            filename_2 = '';
+            actSol = test_file(folder_path, filename_1, filename_2);
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol);
         end
-        function run_phase_6(testCase)
-            actSol = test_phase_var(6);
+        function test_tf_4(testCase)
+            folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_4\';
+            filename_1 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP_fishFaceRight-01-1.tif';
+            filename_2 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP_fishFaceRight-01-2.tif';
+            actSol = test_file(folder_path, filename_1, filename_2);
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol);
         end
-        function run_phase_7(testCase)
-            actSol = test_phase_var(7);
+        function test_tf_5(testCase)
+            folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_5\';
+            filename_1 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP-06-1.tif';
+            filename_2 = '';
+            actSol = test_file(folder_path, filename_1, filename_2);
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol);
         end
-        function run_phase_8(testCase)
-            actSol = test_phase_var(8);
+        function test_tf_6(testCase)
+            folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_6\';
+            filename_1 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP-07-1.tif';
+            filename_2 = '';
+            actSol = test_file(folder_path, filename_1, filename_2);
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol);
         end
-        function run_phase_9(testCase)
-            actSol = test_phase_var(9);
+        function test_tf_7(testCase)
+            folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_7\';
+            filename_1 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP-09-1.tif';
+            filename_2 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP-09-2.tif';
+            actSol = test_file(folder_path, filename_1, filename_2);
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol);
         end
-        function run_phase_10(testCase)
-            actSol = test_phase_var(10);
+        function test_tf_8(testCase)
+            folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_8\';
+            filename_1 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP-1.tif';
+            filename_2 = '';
+            actSol = test_file(folder_path, filename_1, filename_2);
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol);
         end
-        function run_phase_11(testCase)
-            actSol = test_phase_var(11);
+        function test_tf_9(testCase)
+            folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_9\';
+            filename_1 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP-1.tif';
+            filename_2 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP-2.tif';
+            actSol = test_file(folder_path, filename_1, filename_2);
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol);
         end
-        function run_phase_12(testCase)
-            actSol = test_phase_var(12);
-            expSol = "Test ran to completion";
-            testCase.verifyEqual(actSol, expSol);
-        end
-        function run_phase_13(testCase)
-            actSol = test_phase_var(13);
-            expSol = "Test ran to completion";
-            testCase.verifyEqual(actSol, expSol);
-        end
-        function run_phase_14(testCase)
-            actSol = test_phase_var(14);
-            expSol = "Test ran to completion";
-            testCase.verifyEqual(actSol, expSol);
-        end
-        function run_phase_15(testCase)
-            actSol = test_phase_var(15);
+        function test_tf_10(testCase)
+            folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_10\';
+            filename_1 = '2023_10_06_LLS7_76hpf_kdrlMcherryCaax_cmlc2EGFP-1.tif';
+            filename_2 = '';
+            actSol = test_file(folder_path, filename_1, filename_2);
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol);
         end
