@@ -76,7 +76,7 @@ similarity scores within some threshold of the peak.
 2. Open in MATLAB and folder to path
 3. Follow instructions in BioProtocol
 
-### Command line
+### Command line or computer cluster
 ```
 cd Documents\GitHub\UROP\PhaseMatching
 mat PhaseMatching_script
@@ -84,21 +84,79 @@ mat PhaseMatching_script
 
 ## TODO:
 - [x] BUG: Some tif images not displaying - not code problem, dataset not scaled properly
-- [x] TEST: New datasets on USB
-- [ ] TEST: New datasets on OneDrive
-- [ ] TEST: Dataset in vault and shared drive
+- [x] TEST: Datasets on USB
+- [x] TEST: Datasets on OneDrive
+- [x] TEST: Datasets on SharedDrive
+- [ ] TEST: Datasets on Vault
 - [x] TEST: Automate testing
 - [x] REVISE: Save session settings needs to reflect new code
 - [x] REVISE: Outdated functions need removal
 - [x] REVISE: Manual correction GUI information
 - [x] REVISE: GUI unused variables
-~~- [ ] REVISE: Remove preliminary from quiet since we want it to run quickly~~Dependency for advanced phase matching
+- [ ] ~~REVISE: Remove preliminary from quiet since we want it to run quickly~~ Dependency for temporal phase matching
+- [ ] REVISE: Separate draw ROI function for modularity
 - [x] FEATURE: Allow users to save after preliminary
 - [x] FEATURE: Check to prevent overwrite files
-- [ ] FEATURE: Display find peaks for advanced phase matching
-- [ ] FEATURE: Flexible support of datatypes or enforce user???
-- [ ] FEATURE: Deal with original file rather than requiring split or function to split
+- [ ] FEATURE: Display find peaks for temporal phase matching for better targeting
+- [ ] ~~FEATURE: Flexible support of datatypes~~ Restrict user to filter data first
+- [ ] ~~FEATURE: Deal with original file rather than requiring split or function to split~~ Just use ImageJ
 - [x] DOCUMENT: How to use in README.md
 - [x] RELEASE: Package GUI for release (test release done)
 - [ ] CHECK: Instructions are easy to follow
 - [ ] WRITE: Paper for protocol (BioProtocol?)
+
+## Test results - datasets of interest to revisit
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\HajimeUSB\UseForTesting
+    - High temporal and spatial resolution
+    - Phase matching worked well
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_5
+    - Short dataset - only 2 cycles
+    - Output missing last cycle
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_7
+    - Faint channel 1 performance vs bright channel 2
+    - Better peak prominence with bright channel
+    - Opening results in ImageJ reveals adjusted contrast
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_8
+    - Cycle 12 off, check for better frame
+    - Half phase encountered, compromise will be required
+    - Potentially use a phase in the middle for average
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_9
+    - Some noise but seemed to turn out alright
+    - Check which channel was used and relative performance
+    - Brighter channel with more contrast preferred
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Transfer_Files_10
+    - Heart moves spatially
+    - Interesting to see how it affects it
+    - No prominent peaks observed - would not recommend too much movement
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Zeiss\Zeiss_1
+    - Stripey pattern on one of the channels - drops halfway
+    - Noisey for the other channel - cuts off halfway
+    - Compare performance - about the same
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Zeiss\Zeiss_3
+    - Very zoomed in dataset
+    - Seems to not match well
+    - Temporal matching needs fine tuning
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Zeiss\Zeiss_5
+    - Also zoomed in, but seems to work well
+    - Peaks are more prominent than before
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\OneDrive\DL_191218\Data_1
+    - Extremely noisey
+    - See if salvageable - probably not, peaks are really bad
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\OneDrive\DL_191218\Data_3
+    - Looks good overall but needs some ironing out with a couple of frames
+    - Using just prelim seems fine. Need to fine tune temporal matching
+    - Channel 2 signal seems a bit better
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\OneDrive\Renee_231118\Data_1
+    - Double dataset
+    - Really good overall but one mismatch
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\OneDrive\Renee_231118\Data_2
+    - Double dataset
+    - Not great in terms of results - tune parameters?
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\OneDrive\Renee_231118\Data_5
+    - Cardiac cycle momentarily halts - will be interesting to see how phase match
+    - Can't really know what happens since too noisy
+    - Try using other data in that folder, seems less noisy
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\OneDrive\Renee_231118\Data_8
+    - Output is quite off
+
+

@@ -1,4 +1,4 @@
-classdef PhaseMatching_Testing < matlab.unittest.TestCase
+classdef Testing_ZeissSharedDrive < matlab.unittest.TestCase
 
     methods (TestClassSetup)
         % Shared setup for the entire test class
@@ -10,11 +10,6 @@ classdef PhaseMatching_Testing < matlab.unittest.TestCase
 
     methods (Test)
         % Test methods
-        function test_phase_1(testCase)
-            actSol = test_phase_var(1);
-            expSol = "Test ran to completion";
-            testCase.verifyEqual(actSol, expSol);
-        end
         function test_renee_select(testCase)
             folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\SharedDrive\Unsorted\Renee_Selection\';
             filename_1 = '2023-09-22_NewTest.tif';
