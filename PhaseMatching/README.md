@@ -149,14 +149,18 @@ mat PhaseMatching_script
 - C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\OneDrive\Renee_231118\Data_1
     - Double dataset
     - Really good overall but one mismatch
+    - Middle frame reference works better
+    - Allow tuning of temporal matching
 - C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\OneDrive\Renee_231118\Data_2
     - Double dataset
-    - Not great in terms of results - tune parameters?
+    - Not great in terms of results
+    - Need to allow manual manipulation of temporal peak finding
 - C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\OneDrive\Renee_231118\Data_5
     - Cardiac cycle momentarily halts - will be interesting to see how phase match
     - Can't really know what happens since too noisy
     - Try using other data in that folder, seems less noisy
+    - Some phases match well, others not too well
 - C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\OneDrive\Renee_231118\Data_8
-    - Output is quite off
+    - Output is quite off, probably due to noise
 
 
