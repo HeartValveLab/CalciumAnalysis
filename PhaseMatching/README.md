@@ -87,7 +87,7 @@ mat PhaseMatching_script
 - [x] TEST: Datasets on USB
 - [x] TEST: Datasets on OneDrive
 - [x] TEST: Datasets on SharedDrive
-- [ ] TEST: Datasets on Vault
+- [x] TEST: Datasets on Vault
 - [x] TEST: Automate testing
 - [x] REVISE: Save session settings needs to reflect new code
 - [x] REVISE: Outdated functions need removal
@@ -104,6 +104,7 @@ mat PhaseMatching_script
 - [x] RELEASE: Package GUI for release (test release done)
 - [ ] CHECK: Instructions are easy to follow
 - [ ] WRITE: Paper for protocol (BioProtocol?)
+- [ ] BENCHMARK: Find peaks speed and figure speed in GUI => construct_movie takes a while, move to save section of code
 
 ## Test results - datasets of interest to revisit
 - C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\HajimeUSB\UseForTesting
@@ -162,5 +163,32 @@ mat PhaseMatching_script
     - Some phases match well, others not too well
 - C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\OneDrive\Renee_231118\Data_8
     - Output is quite off, probably due to noise
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\Vault\Crucial_SSD1\Data_1
+    - Channel 2 with more contrast works better
+    - Zoomed out datasets are fine as long as peak parameters adjusted accordingly
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\Vault\Crucial_SSD1\Data_8
+    - Algorithm not suited for short timeseries
+- C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\Vault\Crucial_SSD2
+    - Datasets in this folder are quite short and not suitable for analysis
 
+### Summary of results and questions
+- Allow user input for peak finding in temporal phase matching
+    - Reduces automation but more accurate results
+- Recommend users use GUI first for determining good find peaks parameters
+- Figure out why last frame is missing
+    - Probably not too important for large dataset
+- Notify users to use channel with most contrast and 16 bit limitation
+- Not all Vault data was tested, but a random sample
+- Should benchmark spatial vs temporal matching
+- Questions
+    - Will noisy data need to be catered for?
+    - Is it OK to miss a frame or two?
+    - 
 
+- Meeting comments
+    - Benchmark performance (speed and quality) => about same quality but temporal is much slower
+        - Peak separation of 35 better than 15 (i.e. higher temporal resolution)
+    - Find peaks function => probably will redact temporal
+    - Recover last frame
+    - BioProtocol
+    - 

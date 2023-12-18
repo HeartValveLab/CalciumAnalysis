@@ -24,8 +24,19 @@ function run_phase_matching(InputData, InputParams, Visibility, OutputFolder, Ou
     disp('Preliminary phase matching complete')
 
     % ROI Based Phase Matching
+    algorithm = 2;
     disp('Performing advanced phase matching');
-    [Pks, MatchedFrames, N_pks, MeanDist, SsimsTotal] = temporal_phase_matching(InputData, InputParams, MeanDist);
+    switch algorithm
+        case 1
+            
+        case 2
+            [Pks, MatchedFrames, N_pks, MeanDist, SsimsTotal] = temporal_phase_matching(InputData, InputParams, MeanDist);
+            figure(3);
+            plot(1:InputData.n_frames-1, SsimsTotal); hold on;
+            plot(MatchedFrames, Pks, "*")
+        case 3
+            [MatchedFrames] = best_neighbour_phase_matching(InputData, InputParams, MatchedFrames);
+    end
     disp('Advanced phase matching complete');
 
     % Output
