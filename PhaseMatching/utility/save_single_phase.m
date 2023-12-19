@@ -17,7 +17,7 @@ function save_single_phase(input_data, cut_length, images_to_save, n_pks, output
     im = zeros(input_data.height,input_data.width, n_pks-1,input_data.n_channels,1,input_data.data_format); %change to uint16 if using 16 bit images
     centre = cut_length + 1; 
     for channel = 1:input_data.n_channels
-        for matched_phase = 1:n_pks-1
+        for matched_phase = 1:n_pks
             im(:,:,matched_phase,channel,1) = images_to_save{channel,matched_phase,centre};
         end
     end

@@ -13,7 +13,7 @@ function save_multitiff(input_data, cut_length, images_to_save, n_pks, output_pa
 % output_path (str):    Full path to output folder
 % -----OUTPUTS-----
     for matched_phase = 1:2*cut_length+1
-        for cycle = 1:n_pks-1
+        for cycle = 1:n_pks
             for channel = 1:input_data.n_channels
                 ImageFile=['MultiTiff_t' padnumber(3,num2str(cycle)) '_z' padnumber(3,num2str(matched_phase)) '_c00' num2str(channel) '.tif'];
                 imwrite(images_to_save{channel,cycle,matched_phase}, [output_path,filesep,ImageFile],'tif')
