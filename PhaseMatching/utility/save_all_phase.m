@@ -4,7 +4,7 @@ function save_all_phase(input_data, cut_length, images_to_save, n_pks, output_pa
 % ------------------
 % Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
 % Email:    raymond.zhang@monash.edu
-% Updated:  2023-09-12
+% Updated:  2023-12-20
 % ------INPUTS------
 % tif_info (struct):    Metadata pertaining to input dataset
 % n_pks (double):       Number of peaks found
@@ -14,6 +14,7 @@ function save_all_phase(input_data, cut_length, images_to_save, n_pks, output_pa
 % output_path (str):    Full path to output folder
 % phase (double):       Frame to use as reference
 % -----OUTPUTS-----
+% AllPhase.ome:         ome file with padding
     cycle_length = 2*cut_length+1;
     im = zeros(input_data.height,input_data.width, n_pks, input_data.n_channels,cycle_length,input_data.data_format); %change to uint16 if using 16 bit images   
     for ch = 1:input_data.n_channels

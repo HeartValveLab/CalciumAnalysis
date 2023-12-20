@@ -1,17 +1,17 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration file="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching.prj" location="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching" name="PhaseMatching" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="4086464226" file="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching.prj" location="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching" name="PhaseMatching" preferred-package-location="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>PhaseMatching</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
     <param.authnamewatermark>Raymond Zhang</param.authnamewatermark>
     <param.email>raymond.zhang@monash.edu</param.email>
-    <param.company>ARMI, Monash University</param.company>
+    <param.company>ARMI</param.company>
     <param.summary>Phase matching for biological processes.</param.summary>
     <param.description />
-    <param.screenshot />
+    <param.screenshot>${PROJECT_ROOT}\assets\Merged.jpg</param.screenshot>
     <param.guid />
-    <param.installpath.string>\ARMI, Monash University\PhaseMatching\</param.installpath.string>
+    <param.installpath.string>\ARMI\PhaseMatching\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
     <param.logo />
     <param.install.notes />
@@ -31,8 +31,8 @@
     <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
     <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
     <param.windows.command.prompt>true</param.windows.command.prompt>
-    <param.create.log>false</param.create.log>
-    <param.log.file />
+    <param.create.log>true</param.create.log>
+    <param.log.file>phase_matching_log.txt</param.log.file>
     <param.native.matlab>false</param.native.matlab>
     <param.checkbox>false</param.checkbox>
     <param.example />
@@ -50,7 +50,6 @@
       <param.email />
       <param.company />
       <param.description />
-      <param.screenshot />
       <param.guid />
       <param.installpath.string />
       <param.installpath.combo />
@@ -70,8 +69,6 @@
       <param.package.mcr.name />
       <param.no.mcr.name />
       <param.windows.command.prompt />
-      <param.create.log />
-      <param.log.file />
       <param.native.matlab />
       <param.checkbox />
       <param.example />
@@ -79,11 +76,11 @@
     <fileset.main>
       <file>${PROJECT_ROOT}\PhaseMatching_App.mlapp</file>
     </fileset.main>
-    <fileset.resources />
+    <fileset.resources>
+      <file>${PROJECT_ROOT}\utility\omemaker\loci_tools.jar</file>
+    </fileset.resources>
     <fileset.package />
     <fileset.depfun>
-      <file>${PROJECT_ROOT}\ManualCorrect.mlapp</file>
-      <file>${PROJECT_ROOT}\utility\best_neighbour_phase_matching.m</file>
       <file>${PROJECT_ROOT}\utility\construct_movie.m</file>
       <file>${PROJECT_ROOT}\utility\find_peaks.m</file>
       <file>${PROJECT_ROOT}\utility\input_data.m</file>
@@ -98,8 +95,10 @@
       <file>${PROJECT_ROOT}\utility\save_multitiff.m</file>
       <file>${PROJECT_ROOT}\utility\save_phase_matching_session.m</file>
       <file>${PROJECT_ROOT}\utility\save_single_phase.m</file>
+      <file>${PROJECT_ROOT}\utility\spatial_phase_matching.m</file>
       <file>${PROJECT_ROOT}\utility\ssim_wrapper.m</file>
       <file>${PROJECT_ROOT}\utility\temporal_phase_matching.m</file>
+      <file>${PROJECT_ROOT}\utility\update_peaks.m</file>
     </fileset.depfun>
     <build-deliverables>
       <file location="${PROJECT_ROOT}\PhaseMatching\for_testing" name="readme.txt" optional="true">C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching\for_testing\readme.txt</file>

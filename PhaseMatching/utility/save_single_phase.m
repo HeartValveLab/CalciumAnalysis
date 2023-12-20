@@ -4,7 +4,7 @@ function save_single_phase(input_data, cut_length, images_to_save, n_pks, output
 % ------------------
 % Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
 % Email:    raymond.zhang@monash.edu
-% Updated:  2023-09-12
+% Updated:  2023-12-20
 % ------INPUTS------
 % tif_info (struct):    Metadata pertaining to input dataset
 % n_pks (double):       Number of peaks found
@@ -14,6 +14,7 @@ function save_single_phase(input_data, cut_length, images_to_save, n_pks, output
 % output_path (str):    Full path to output folder
 % phase (double):       Frame to use as reference
 % -----OUTPUTS-----
+% SinglePhase.ome:      ome file where z frames are phase matched
     im = zeros(input_data.height,input_data.width, n_pks-1,input_data.n_channels,1,input_data.data_format); %change to uint16 if using 16 bit images
     centre = cut_length + 1; 
     for channel = 1:input_data.n_channels

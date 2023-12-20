@@ -4,7 +4,7 @@ function save_multitiff(input_data, cut_length, images_to_save, n_pks, output_pa
 % ------------------
 % Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
 % Email:    raymond.zhang@monash.edu
-% Updated:  2023-09-12
+% Updated:  2023-12-20
 % ------INPUTS------
 % n_pks (double):       Number of peaks found
 % n_channels (double):  Number of input channels used
@@ -12,6 +12,7 @@ function save_multitiff(input_data, cut_length, images_to_save, n_pks, output_pa
 % images_to_save (cell):Data object to save phase matched images
 % output_path (str):    Full path to output folder
 % -----OUTPUTS-----
+% MultiTiff.tif:        Individual tif images
     for matched_phase = 1:2*cut_length+1
         for cycle = 1:n_pks
             for channel = 1:input_data.n_channels

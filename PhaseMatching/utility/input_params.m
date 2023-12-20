@@ -1,6 +1,10 @@
 classdef input_params
-    % INPUT_PARAMS helps to keep track of the input variables and contains
-    % methods to help keep track of metadata
+% INPUT_PARAMS helps to keep track of the input variables and contains
+% methods to help keep track of metadata
+% ------------------
+% Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
+% Email:    raymond.zhang@monash.edu
+% Updated:  2023-12-20
     properties
         n_scales                % NumScales to be used in multissim
         min_peak_height         % MinPeakHeight to be used in findpeaks

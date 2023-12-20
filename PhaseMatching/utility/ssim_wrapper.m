@@ -5,13 +5,14 @@ function ssim_scores = ssim_wrapper(img_ref, tif_path, x_bounds, y_bounds, frame
 % ------------------
 % Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
 % Email:    raymond.zhang@monash.edu
-% Updated:  2023-11-01
+% Updated:  2023-12-20
 % ------INPUTS------
 % img_ref (arr):        Reference image
 % tif_path (str):       Path to dataset
 % x_bounds (arr):       x coordinates of ROI
 % y_bounds (arr):       y coordinates of ROI
 % frame_idx (arr):      Frames from tif file to use
+% num_scales (int):     Tuning parameter for multissim3 algorithm
 % -----OUTPUTS-----
 % ssim_scores (arr):    List of similarity scores
     ssim_scores = [];

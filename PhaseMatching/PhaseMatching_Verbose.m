@@ -19,21 +19,6 @@ InputData.filename_1 = '0-499-Nuc.tif';
 InputData.filename_2 = '0-499-Ca.tif';   % optional
 InputData.filename_3 = '';               % optional
 
-% InputData.folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\HajimeUSB\UseForTesting\';
-% InputData.filename_1 = 'SingleFile-Ch1.tif';
-% InputData.filename_2 = 'SingleFile-Ch2.tif';   % optional
-% InputData.filename_3 = '';               % optional
-
-% InputData.folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\CardiacCycle_full\';
-% InputData.filename_1 = '0-4499-Nuc.tif';
-% InputData.filename_2 = '0-4499-Ca.tif';   % optional
-% InputData.filename_3 = '';               % optional
-% 
-% InputData.folder_path = 'C:\Users\rzha0171\Documents\GitHub\UROP\SampleData\Cilia\';
-% InputData.filename_1 = 'injured_motile_Rep_8_bit.tif';
-% InputData.filename_2 = '';   % optional
-% InputData.filename_3 = '';               % optional
-
 InputData.main_ch = 2; % channel to be used for reference
 InputData.phase = 15;  % frame to be used for reference
 
@@ -41,11 +26,10 @@ InputParams = input_params;
 InputParams.n_scales = 5;
 InputParams.min_peak_height = 0;
 InputParams.min_peak_prominence = 0.05;
-
-InputParams.ROI = [236, 183, 338, 337];     % x_start, y_start, x_end, y_end
-%InputParams.ROI = [0.5, 0.5, 144, 136];
+InputParams.ROI = [0.5, 0.5, InputData.width, InputData.height]; %[236, 183, 338, 337];     % x_start, y_start, x_end, y_end
 InputParams.padding = 3;
-InputParams.n_neighbours = 2;
+
+MatchingMode = 'spatial';
 
 Visibility = 'on'; % display figures or not
 OutputFolder = 'PhaseMatchingOutput';
@@ -64,37 +48,53 @@ title('This is our reference image for phase matching')
 disp('User inputs processed')
 
 
-%% Preliminary Phase Matching
-disp('Performing preliminary phase matching');
-SsimScoresMain = ssim_wrapper(ImgRef, InputData.main_path, 1:InputData.width, 1:InputData.height, 1:InputData.n_frames, InputParams.n_scales);
-[Pks, MatchedFrames, N_pks, MeanDist] = find_peaks(SsimScoresMain, InputParams.min_peak_height, InputParams.min_peak_prominence, 0, InputData.phase);
+%% Calculate similarity scores
+disp('Determining similarity scores.');
+
+switch MatchingMode
+    case 'spatial'
+        SsimScores = spatial_phase_matching(InputData, InputParams);
+    case 'temporal'
+        SsimScores = temporal_phase_matching(InputData, InputParams);
+end
 
 f2 = figure(2);
 f2.Visible = Visibility;
-plot(1:InputData.n_frames, SsimScoresMain); hold on;
-plot(MatchedFrames, Pks, "*")
-title(['ssim scores. ', num2str(N_pks), ' peaks found at an average distance of ', num2str(MeanDist)])
-disp('Preliminary phase matching complete')
+plot(SsimScores);
+title('Similarity scores for each frame')
+
+disp('Similarity scores calculated. Determine peak locations.')
 
 
-%% ROI Based Phase Matching
-disp('Performing advanced phase matching');
-[Pks, MatchedFrames, N_pks, MeanDist, SsimsTotal] = temporal_phase_matching(InputData, InputParams, MeanDist);
-%[MatchedFrames] = best_neighbour_phase_matching(InputData, InputParams, MatchedFrames);
+%% Finding peaks
+disp('Determining location of peaks.');
+[Pks, PkLocs, N_pks, MeanDist] = find_peaks(SsimScores, InputParams.min_peak_height, InputParams.min_peak_prominence, 0, InputData.phase);
+f2 = figure(2);
+f2.Visible = Visibility;
+plot(SsimScores); hold on;
+plot(PkLocs, Pks, "*");
+title('Similarity scores for each frame')
+disp('Peaks located.');
 
-% figure('Visible',Visibility);
-% plot(1:InputData.n_frames-1, SsimsTotal); hold on;
-% plot(MatchedFrames, Pks, "*")
-% title(['ssim scores. ', num2str(N_pks), ' peaks found at an average distance of ', num2str(MeanDist)])
-% disp('Preliminary phase matching complete')
 
-disp('Advanced phase matching complete');
+%% Update peaks
+try
+    cursor_info = evalin('base', 'cursor_info');
+    [Pks, PkLocs, N_pks, MeanDist] = update_peaks(cursor_info, Pks, PkLocs);
+catch
+    
+end
+f2 = figure(2);
+f2.Visible = Visibility;
+plot(SsimScores); hold on;
+plot(PkLocs, Pks, "*");
+title('Similarity scores for each frame')
 
 
 %% Create movie
 CutLength = InputParams.cut_length(MeanDist);
 ImagesToSave = cell(InputData.n_channels, N_pks, 2*CutLength+1);
-ImagesToSave = construct_movie(InputData.file_paths, ImagesToSave, MatchedFrames, CutLength);
+ImagesToSave = construct_movie(InputData.file_paths, ImagesToSave, PkLocs, CutLength);
 
 
 %% Output

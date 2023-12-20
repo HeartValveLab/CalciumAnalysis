@@ -3,7 +3,7 @@ function [pks, pk_locs, n_pks, mean_dist] = find_peaks(ssim_score_lst, min_peak_
 % ------------------
 % Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
 % Email:    raymond.zhang@monash.edu
-% Updated:  2023-11-09
+% Updated:  2023-12-20
 % ------INPUTS------
 % ssim_score_lst (arr):     List of similarity scores
 % min_peak_height (double): Adjustable parameter for findpeaks
@@ -18,10 +18,6 @@ function [pks, pk_locs, n_pks, mean_dist] = find_peaks(ssim_score_lst, min_peak_
         MinPeakDistance = min_peak_dist, ...
         MinPeakHeight = min_peak_height, ...
         MinPeakProminence = min_peak_prom);
-    if phase == 1
-        pk_locs = [1; pk_locs];
-        pks = [ssim_score_lst(1); pks];
-    end
     n_pks = length(pk_locs);
     mean_dist = mean(diff(pk_locs));
 end

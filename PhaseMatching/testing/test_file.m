@@ -20,7 +20,7 @@ InputData.phase = 5;  % frame to be used for reference
 InputParams = input_params;
 InputParams.n_scales = 5;
 InputParams.min_peak_height = 0;
-InputParams.min_peak_prominence = 0.005;
+InputParams.min_peak_prominence = 0.001;
 
 InputParams.ROI = [0.5, 0.5, InputData.width, InputData.height];     % x_start, y_start, x_end, y_end
 InputParams.padding = 3;
@@ -29,10 +29,11 @@ InputParams.n_neighbours = 2;
 Visibility = 'on'; % display figures or not
 OutputFolder = 'PhaseMatchingOutput';
 Output = '010';
+MatchingMode = 'spatial';
 
 disp('Inputs initialised');
 
-run_phase_matching(InputData, InputParams, Visibility, OutputFolder, Output);
+run_phase_matching(InputData, InputParams, Visibility, OutputFolder, Output, MatchingMode);
 
 %% DO NOT REMOVE
 close all; % optional

@@ -1,6 +1,10 @@
 classdef input_data
-    % INPUT_DATA helps to keep track of input file data and contains
-    % methods to help keep track of metadata.
+% INPUT_DATA helps to keep track of input file data and contains
+% methods to help keep track of metadata.
+% ------------------
+% Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
+% Email:    raymond.zhang@monash.edu
+% Updated:  2023-12-20
     properties
         folder_path     % path to folder containing dataset
         filename_1      % filename of channel 1

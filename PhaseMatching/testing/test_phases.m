@@ -27,13 +27,14 @@ InputParams.ROI = [236, 183, 338, 337];     % x_start, y_start, x_end, y_end
 InputParams.padding = 3;
 InputParams.n_neighbours = 2;
 
+MatchingMode = 'spatial';
 Visibility = 'on'; % display figures or not
 OutputFolder = 'PhaseMatchingOutput';
 Output = '010';
 
 disp('Inputs initialised');
 
-run_phase_matching(InputData, InputParams, Visibility, OutputFolder, Output);
+run_phase_matching(InputData, InputParams, Visibility, OutputFolder, Output, MatchingMode);
 
 
 %% DO NOT REMOVE
