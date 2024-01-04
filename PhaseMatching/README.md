@@ -62,6 +62,15 @@ The main algorithm utilises MATLAB's inbuilt `multissim3` which allows each vide
         4. Session settings allows you to easily rerun code in a script
     2. Click `Save`
     
+### Running script
+1. Clone this repository
+2. Open in MATLAB and add folder to path
+3. Adjust input parameters as required
+4. `Run` the script
+
+
+## Extra information for developers
+
 ### Creating standalone application
 1. In the GUI click on `Share` then `Standalone Desktop App`
 2. Select `Runtime included in package`
@@ -69,17 +78,12 @@ The main algorithm utilises MATLAB's inbuilt `multissim3` which allows each vide
 4. `Package`
 5. Once created, drag MyAppInstaller_mcr.exe under for_redistribution into release page of Github
 
-### Script
-1. Clone this repository
-2. Open in MATLAB and folder to path
-3. Follow instructions in BioProtocol
-
-### Command line or computer cluster
+### Command line
 ```
 cd Documents\GitHub\UROP\PhaseMatching
 mat PhaseMatching_script
 ```
 
-## TODO:
+### TODO:
 - [ ] CHECK: Instructions are easy to follow
 - [ ] WRITE: Paper for protocol
