@@ -1,25 +1,25 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="3835730887" file="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching.prj" location="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching" name="PhaseMatching" preferred-package-location="C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
-    <param.appname>PhaseMatching</param.appname>
+  <configuration build-checksum="651883202" file="C:\Users\rzha0171\Documents\GitHub\UROP\SignalAnalysis\SignalAnalysis.prj" location="C:\Users\rzha0171\Documents\GitHub\UROP\SignalAnalysis" name="SignalAnalysis" preferred-package-location="C:\Users\rzha0171\Documents\GitHub\UROP\SignalAnalysis\SignalAnalysis\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>SignalAnalysis</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
     <param.authnamewatermark>Raymond Zhang</param.authnamewatermark>
     <param.email>raymond.zhang@monash.edu</param.email>
     <param.company>ARMI</param.company>
-    <param.summary>Phase matching for biological processes.</param.summary>
+    <param.summary>Performs signal analysis for calcium and nuclear channels.</param.summary>
     <param.description />
     <param.screenshot>${PROJECT_ROOT}\assets\Merged.jpg</param.screenshot>
     <param.guid />
-    <param.installpath.string>\ARMI\PhaseMatching\</param.installpath.string>
+    <param.installpath.string>\ARMI\SignalAnalysis\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
     <param.logo />
     <param.install.notes />
     <param.target.install.notes />
-    <param.intermediate>${PROJECT_ROOT}\PhaseMatching\for_testing</param.intermediate>
-    <param.files.only>${PROJECT_ROOT}\PhaseMatching\for_redistribution_files_only</param.files.only>
-    <param.output>${PROJECT_ROOT}\PhaseMatching\for_redistribution</param.output>
-    <param.logdir>${PROJECT_ROOT}\PhaseMatching</param.logdir>
+    <param.intermediate>${PROJECT_ROOT}\SignalAnalysis\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\SignalAnalysis\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\SignalAnalysis\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\SignalAnalysis</param.logdir>
     <param.enable.clean.build>false</param.enable.clean.build>
     <param.user.defined.mcr.options />
     <param.target.type>subtarget.standalone</param.target.type>
@@ -28,11 +28,11 @@
     <param.package.mcr>true</param.package.mcr>
     <param.no.mcr>false</param.no.mcr>
     <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
-    <param.package.mcr.name>PhaseMatchingInstaller</param.package.mcr.name>
+    <param.package.mcr.name>SignalAnalysisInstaller</param.package.mcr.name>
     <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
     <param.windows.command.prompt>true</param.windows.command.prompt>
     <param.create.log>true</param.create.log>
-    <param.log.file>phase_matching_log.txt</param.log.file>
+    <param.log.file>SignalAnalysisLog</param.log.file>
     <param.native.matlab>false</param.native.matlab>
     <param.checkbox>false</param.checkbox>
     <param.example />
@@ -73,36 +73,23 @@
       <param.example />
     </unset>
     <fileset.main>
-      <file>${PROJECT_ROOT}\PhaseMatching_App.mlapp</file>
+      <file>${PROJECT_ROOT}\SignalAnalysis_App.mlapp</file>
     </fileset.main>
-    <fileset.resources>
-      <file>${PROJECT_ROOT}\utility\omemaker\loci_tools.jar</file>
-    </fileset.resources>
+    <fileset.resources />
     <fileset.package />
     <fileset.depfun>
-      <file>${PROJECT_ROOT}\utility\construct_movie.m</file>
-      <file>${PROJECT_ROOT}\utility\find_peaks.m</file>
-      <file>${PROJECT_ROOT}\utility\input_data.m</file>
-      <file>${PROJECT_ROOT}\utility\input_params.m</file>
-      <file>${PROJECT_ROOT}\utility\omemaker\bfCheckJavaMemory.m</file>
-      <file>${PROJECT_ROOT}\utility\omemaker\bfCheckJavaPath.m</file>
-      <file>${PROJECT_ROOT}\utility\omemaker\bfsave.m</file>
-      <file>${PROJECT_ROOT}\utility\omemaker\createMinimalOMEXMLMetadata.m</file>
-      <file>${PROJECT_ROOT}\utility\omemaker\is_octave.m</file>
-      <file>${PROJECT_ROOT}\utility\omemaker\padnumber.m</file>
-      <file>${PROJECT_ROOT}\utility\save_all_phase.m</file>
-      <file>${PROJECT_ROOT}\utility\save_multitiff.m</file>
-      <file>${PROJECT_ROOT}\utility\save_phase_matching_session.m</file>
-      <file>${PROJECT_ROOT}\utility\save_single_phase.m</file>
-      <file>${PROJECT_ROOT}\utility\spatial_phase_matching.m</file>
-      <file>${PROJECT_ROOT}\utility\ssim_wrapper.m</file>
-      <file>${PROJECT_ROOT}\utility\temporal_phase_matching.m</file>
-      <file>${PROJECT_ROOT}\utility\update_peaks.m</file>
+      <file>${PROJECT_ROOT}\utility\calculate_signal.m</file>
+      <file>${PROJECT_ROOT}\utility\initialise_signal_analysis.m</file>
+      <file>${PROJECT_ROOT}\utility\overlay.m</file>
+      <file>${PROJECT_ROOT}\utility\plot_normalised_signal.m</file>
+      <file>${PROJECT_ROOT}\utility\plot_raw_signal.m</file>
+      <file>${PROJECT_ROOT}\utility\save_ROI.m</file>
+      <file>${PROJECT_ROOT}\utility\save_signal_analysis.m</file>
     </fileset.depfun>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\PhaseMatching\for_testing" name="readme.txt" optional="true">C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching\for_testing\readme.txt</file>
-      <file location="${PROJECT_ROOT}\PhaseMatching\for_testing" name="PhaseMatching.exe" optional="false">C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching\for_testing\PhaseMatching.exe</file>
-      <file location="${PROJECT_ROOT}\PhaseMatching\for_testing" name="splash.png" optional="false">C:\Users\rzha0171\Documents\GitHub\UROP\PhaseMatching\PhaseMatching\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\SignalAnalysis\for_testing" name="splash.png" optional="false">C:\Users\rzha0171\Documents\GitHub\UROP\SignalAnalysis\SignalAnalysis\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\SignalAnalysis\for_testing" name="readme.txt" optional="true">C:\Users\rzha0171\Documents\GitHub\UROP\SignalAnalysis\SignalAnalysis\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\SignalAnalysis\for_testing" name="SignalAnalysis.exe" optional="false">C:\Users\rzha0171\Documents\GitHub\UROP\SignalAnalysis\SignalAnalysis\for_testing\SignalAnalysis.exe</file>
     </build-deliverables>
     <workflow />
     <matlab>

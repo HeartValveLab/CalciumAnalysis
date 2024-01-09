@@ -46,16 +46,17 @@ $$normalised=\frac{\frac{calcium}{nuclear}-baseline}{baseline}.$$
 
 ## Extra information for developers
 ### Creating standalone application
-1. In the GUI click on `Share` then `Standalone Desktop App`
-2. Select `Runtime included in package`
-3. `Package`
-4. Once created, drag MyAppInstaller_mcr.exe under for_redistribution into release page of Github
+1. Download R2022b runtime from https://au.mathworks.com/products/compiler/matlab-runtime.html
+2. Add it in Preference>MATLAB Compiler (https://au.mathworks.com/matlabcentral/answers/402422-why-do-i-receive-a-runtime-not-found-prompt-when-creating-a-standalone-application-using-matlab-co)
+3. In the GUI click on `Share` then `Standalone Desktop App`
+4. Select `Runtime included in package`. Change the name of the package if you want.
+5. `Package`
+6. Once created, drag MyAppInstaller_mcr.exe under for_redistribution into release page of Github
 
 ### TODO:
 - [x] UPDATE: Readme information
-- [ ] UPDATE: Include use of classes to tidy up code
-- [ ] FEATURE: Prevent overwrite and unnecessary saving (save via figure?)
-- [ ] FEATURE: Automatically close figures to prevent clogging up (or use figure numbers)
-- [ ] TEST: Automate testing of code
+- [ ] ~~UPDATE: Include use of classes to tidy up code~~ Works as it currently is
+- [ ] ~~FEATURE: Prevent overwrite and unnecessary saving (save via figure?)~~ Autosave makes it easier for user
+- [x] FEATURE: Automatically close figures to prevent clogging up (or use figure numbers)
 - [ ] CHECK: Instructions are easy to follow
 - [ ] WRITE: Paper for protocol
