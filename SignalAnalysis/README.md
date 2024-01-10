@@ -1,6 +1,6 @@
 # Signal Analysis
 
-The signal analysis program was designed to streamline the analysis of the calcium signal. There are three versions available - 
+The signal analysis program was designed to streamline the analysis of the calcium signal and also integrates the overlay feature within it. There are three versions available - 
 
 - A GUI version
   - Interactive experience
@@ -11,52 +11,51 @@ The signal analysis program was designed to streamline the analysis of the calci
 - A quiet script version
   - Abstracts away individual functions
   - Can save configuration from GUI
-  - Run on supercomputer for large datasets
 
 The signals for each channel were calculated using MATLAB's inbuilt `regionprops` function to get the mean intensity for the region of interest in each frame. The calcium signal was then normalised against the baseline, where
-$$baseline=\min \frac{calcium}{nuclear}$$
+$$baseline=\min \frac{calcium}{reference}$$
 and
-$$normalised=\frac{\frac{calcium}{nuclear}-baseline}{baseline}.$$
+$$normalised=\frac{\frac{calcium}{reference}-baseline}{baseline}.$$
 
-## Getting started
+## Getting started - for users
 
-### Loading GUI
-1. Setting up with a clone of this repository
+### Download and Install GUI
+1. Setting up with a clone of this repository - recommend if you already have MATLAB
 	1. Open MATLAB
 	2. Navigate to the folder you cloned this repository to or downloaded the release
-	3. On the file explorer panel to the left, right click on `PhaseMatching` folder and add it to path
-	4. Type in the command prompt `PhaseMatching_App` to open phase matching GUI
-2. Or setting up with a copy of PhaseMatching.exe
-	1. Go to the release page of the repository and download the MyAppInstaller_mcr.exe
-	2. Run the PhaseMatching.exe installer
-	3. Follow prompts for installation
-	4. Navigate to installation folder and run `PhaseMatching` application
+	3. On the file explorer panel to the left, right click on `SignalAnalysis` folder and add it to path
+	4. Type in the MATLAB command prompt `SignalAnalysis_App` to open the Signal Analysis GUI
+2. Or setting up with a copy of SignalAnalysis_Installer.exe
+	1. Go to the release page of the repository and download the SignalAnalysis_Installer.exe
+	2. Run SignalAnalysis_Installer.exe
+	3. Follow prompts for installation. **Note** that Mac and Linux users may need to download the R2022b runtime separately via https://au.mathworks.com/products/compiler/matlab-runtime.html
+	4. Navigate to the folder where you installed the application and run `SignalAnalysis` 
 
 ### Using GUI
+Details available in protocol.
 1. Initiate the input files
 2. Overlay the frames for each channel
 3. Select a region of interest
 4. Plot signals of desire
 
-### Running script
+### Running Script
 1. Clone this repository
 2. Open in MATLAB and add folder to path
 3. Adjust input parameters as required
 4. `Run` the script
 
-## Extra information for developers
+## Extra Information for Developers
 ### Creating standalone application
 1. Download R2022b runtime from https://au.mathworks.com/products/compiler/matlab-runtime.html
-2. Add it in Preference>MATLAB Compiler (https://au.mathworks.com/matlabcentral/answers/402422-why-do-i-receive-a-runtime-not-found-prompt-when-creating-a-standalone-application-using-matlab-co)
-3. In the GUI click on `Share` then `Standalone Desktop App`
-4. Select `Runtime included in package`. Change the name of the package if you want.
+2. Add it in Preference>MATLAB Compiler - helpful link if case you get stuck https://au.mathworks.com/matlabcentral/answers/402422-why-do-i-receive-a-runtime-not-found-prompt-when-creating-a-standalone-application-using-matlab-co
+3. In the .mlapp file click on `Share` then `Standalone Desktop App`
+4. Select `Runtime included in package`. Make the name SignalAnalysis_Installer.
 5. `Package`
-6. Once created, drag MyAppInstaller_mcr.exe under for_redistribution into release page of Github
+6. Once created, drag SignalAnalysis_Installer.exe under for_redistribution into release page of Github
+7. You can use SignalAnalysis.exe for testing on local machine and track errors in .log file
 
 ### TODO:
 - [x] UPDATE: Readme information
-- [ ] ~~UPDATE: Include use of classes to tidy up code~~ Works as it currently is
-- [ ] ~~FEATURE: Prevent overwrite and unnecessary saving (save via figure?)~~ Autosave makes it easier for user
 - [x] FEATURE: Automatically close figures to prevent clogging up (or use figure numbers)
 - [ ] CHECK: Instructions are easy to follow
 - [ ] WRITE: Paper for protocol
