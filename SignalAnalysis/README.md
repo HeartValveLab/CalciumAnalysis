@@ -57,5 +57,7 @@ Details available in protocol.
 ### TODO:
 - [x] UPDATE: Readme information
 - [x] FEATURE: Automatically close figures to prevent clogging up (or use figure numbers)
+- [ ] FEATURE: Select region of interest channel option and display
+- [ ] FEATURE: Overlay display both channels overlayed.
 - [ ] CHECK: Instructions are easy to follow
 - [ ] WRITE: Paper for protocol

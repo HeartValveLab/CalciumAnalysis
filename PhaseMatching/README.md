@@ -64,3 +64,5 @@ mat PhaseMatching_script
 ### TODO:
 - [ ] CHECK: Instructions are easy to follow
 - [ ] WRITE: Paper for protocol
+Similarity index
+Axes labels

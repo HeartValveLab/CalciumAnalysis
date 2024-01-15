@@ -1,15 +1,14 @@
 function [pks, pk_locs, n_pks, mean_dist] = update_peaks(cursor_info, pks, pk_locs)
-% FIND_PEAKS finds the list of peaks from the similarity scores
+% UPDATE_PEAKS updates the list of peaks to use in phase matching output.
+% Existing peaks will be deselected and non-existing peaks will be added.
 % ------------------
 % Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
 % Email:    raymond.zhang@monash.edu
-% Updated:  2023-12-20
+% Updated:  2024-01-15
 % ------INPUTS------
 % cursor_info (struct):     Position of points user selected in figure
 % pks (arr):                Value of peaks
 % pk_locs (arr):            Location of peaks
-% n_pks (arr):              Number of peaks found
-% mean_dist (double):       Average number of frames between peaks
 % -----OUTPUTS-----
 % pks (arr):                Value of peaks
 % pk_locs (arr):            Location of peaks
