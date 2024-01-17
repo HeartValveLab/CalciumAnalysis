@@ -9,7 +9,7 @@ There are two main applications developed here -
 2. Signal vs Time
 
 ## Getting Started - For Users
-1. Download and unzip the `Assets` in the `Releases` on the right-hand side of this GitHub page.
+1. Download and unzip the `Assets` under `Calcium Analysis` in the `Releases` on the right-hand side of this GitHub page.
 2. If you already have MATLAB
 	1. Open MATLAB
 	2. Navigate to the folder you unzipped the `Source Code` in the file explorer panel to the left
@@ -22,4 +22,4 @@ There are two main applications developed here -
 	2. Follow the prompts for installation. **Note** that Mac and Linux users may need to download the R2022b runtime separately via https://au.mathworks.com/products/compiler/matlab-runtime.html
 	3. Navigate to the folder you installed the application and run it
 
-Details for using each application is specified in the protocol available _____
+Details for using each application is specified in the protocol available [here](https://armi.org.au/our-groups/chow-group/).
