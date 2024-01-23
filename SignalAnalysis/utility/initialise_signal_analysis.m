@@ -1,13 +1,13 @@
-function [file_paths, output_path, tif_info, n_frames, n_channels, end_frame] = initialise_signal_analysis(folder_path, filename_nuc, filename_ch, start_frame, end_frame, output_folder);
+function [file_paths, output_path, tif_info, n_frames, n_channels, end_frame] = initialise_signal_analysis(folder_path, filename_ref, filename_ch, start_frame, end_frame, output_folder);
 % INITIALISE_SIGNAL_ANALYSIS takes in user input parameters and returns values that may be
 % needed later on.
 % ------------------
 % Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
 % Email:    raymond.zhang@monash.edu
-% Updated:  2023-09-12
+% Updated:  2024-01-23
 % ------INPUTS------
 % folder_path (str):    Folder containing datasets
-% filename_nuc (str):   Filename containing phase matched nuclear data
+% filename_ref (str):   Filename containing phase matched reference data
 % filename_ca (str):    Filename containing phase matched calcium data
 % start_frame (str):    First frame of data to use
 % end_frame (str):      Last frame of data to use
@@ -19,7 +19,7 @@ function [file_paths, output_path, tif_info, n_frames, n_channels, end_frame] = 
 % n_frames (double):    Number of frames to be used for analysis
 % end_frame (double):   Last frame of data to use
     file_paths = {
-                strcat(folder_path, filename_nuc), ...
+                strcat(folder_path, filename_ref), ...
                 strcat(folder_path, filename_ch), ...
                 };
     output_path = [folder_path, output_folder];

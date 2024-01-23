@@ -1,4 +1,4 @@
-function save_signal_analysis(folder_path, filename_nuc, filename_ca, start_frame, end_frame, output_folder, exposure_time, mean_dist)
+function save_signal_analysis(folder_path, filename_ref, filename_ca, start_frame, end_frame, output_folder, exposure_time, mean_dist, disp_ch, normalisation)
     %% Save settings
     folder_w = [folder_path, output_folder];
     fid = fopen([folder_w, '\SignalAnalysisSession_', datestr(now, 'ddmmyyyy_HHMMSS'), '.m'], 'wt' );
@@ -14,20 +14,22 @@ function save_signal_analysis(folder_path, filename_nuc, filename_ca, start_fram
     fprintf(fid, '%%%% USER INPUTS\n');
     fprintf(fid, "disp('Reading user inputs');\n");
     fprintf(fid, "FolderPath = '%s';\n", folder_path);
-    fprintf(fid, "FileNameNucCh = '%s';\n", filename_nuc);
+    fprintf(fid, "FileNameNucCh = '%s';\n", filename_ref);
     fprintf(fid, "FileNameCaCh = '%s';\n", filename_ca);
     fprintf(fid, "StartFrame = %i;\n", start_frame);
     fprintf(fid, "EndFrame = %i;\n", end_frame);
     fprintf(fid, "OutputFolder = '%s';\n", output_folder);
     fprintf(fid, "ExposureTime = %i; %% exposure time in milliseconds\n", exposure_time);
     fprintf(fid, "MeanDist = %f; %% frames per cycle\n", mean_dist);
+    fprintf(fid, "DispChannel = '%s';\n", disp_ch);
+    fprintf(fid, "Normalisation = '%s';\n", normalisation);
     fprintf(fid, "Visibility = 'off'; %% display figures or note\n");
     fprintf(fid, "load([FolderPath, OutputFolder, '\\ROI_boundary.mat'])\n\n\n");
     
     fprintf(fid, '%%%% RUN CODE\n');
     fprintf(fid, "run_signal_analysis(FolderPath, FileNameNucCh, FileNameCaCh, ...\n");
     fprintf(fid, "    StartFrame, EndFrame, OutputFolder, ExposureTime, MeanDist, ...\n");
-    fprintf(fid, "    Visibility, ROI_boundary);\n");
+    fprintf(fid, "    Visibility, ROI_boundary, Normalisation);\n");
     
     fclose(fid);
 end

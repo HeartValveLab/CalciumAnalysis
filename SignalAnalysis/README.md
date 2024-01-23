@@ -12,10 +12,15 @@ The signal analysis program was designed to streamline the analysis of the calci
   - Abstracts away individual functions
   - Can save configuration from GUI
 
-The signals for each channel were calculated using MATLAB's inbuilt `regionprops` function to get the mean intensity for the region of interest in each frame. The calcium signal was then normalised against the baseline, where
+The signals for each channel were calculated using MATLAB's inbuilt `regionprops` function to get the mean intensity for the region of interest in each frame. The calcium signal can then be normalised against the reference channel, where
 $$baseline=\min \frac{calcium}{reference}$$
-and
+
 $$normalised=\frac{\frac{calcium}{reference}-baseline}{baseline}.$$
+
+Alternatively, it can be normalised against itself, where
+$$baseline=\min calcium$$
+
+$$normalised = \frac{calcium-baseline}{baseline}$$
 
 ## Getting started - for users
 
@@ -57,7 +62,7 @@ Details available in protocol.
 ### TODO:
 - [x] UPDATE: Readme information
 - [x] FEATURE: Automatically close figures to prevent clogging up (or use figure numbers)
-- [ ] FEATURE: Select region of interest channel option and display
-- [ ] FEATURE: Overlay display both channels overlayed.
+- [x] FEATURE: Select region of interest channel option and display
+- [x] FEATURE: Overlay display both channels overlayed.
 - [ ] CHECK: Instructions are easy to follow
 - [ ] WRITE: Paper for protocol

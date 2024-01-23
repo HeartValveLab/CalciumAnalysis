@@ -3,10 +3,10 @@ function plot_normalised_signal(visibility,normalised_signal,n_frames,mean_dist,
 % ------------------
 % Author:   Raymond Zhang (Australian Regenerative Medicine Institute)
 % Email:    raymond.zhang@monash.edu
-% Updated:  2023-09-12
+% Updated:  2024-01-23
 % ------INPUTS------
 % visibility (str):         Indicates whether figures should be displayed
-% normalised_signal (arr):  Calcium signal normalised to nuclear background
+% normalised_signal (arr):  Calcium signal normalised
 % n_frames (double):        Number of frames to be used for analysis
 % mean_dist (double):       Average number of frames between cycles
 % exposure_time (double):   Duration in ms that a frame is exposed for
