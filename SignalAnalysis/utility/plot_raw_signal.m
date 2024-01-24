@@ -8,7 +8,7 @@ function plot_raw_signal(visibility,ca_signal,ref_signal,n_frames,mean_dist,expo
 % ------INPUTS------
 % visibility (str):         Indicates whether figures should be displayed
 % ca_signal (arr):          Calcium signal
-% ref_signal (str):         Nuclear signal
+% ref_signal (str):         Reference signal
 % n_frames (double):        Number of frames to be used for analysis
 % mean_dist (double):       Average number of frames between cycles
 % exposure_time (double):   Duration in ms that a frame is exposed for
@@ -21,8 +21,8 @@ figure('Visible',visibility);
     title('Raw signal - cycles')
     xlabel('Time [cycles]');
     ylabel('Signal Intensity');
-    legend('CaSignal','NucSignal')
-    image_name = fullfile(output_path,'Raw Calcium and Nuclear Signal - cycles');
+    legend('CaSignal','RefSignal')
+    image_name = fullfile(output_path,'Raw Calcium and Reference Signal - cycles');
     saveas(gcf,image_name,'tiff');
     
     figure('Visible',visibility);
@@ -33,8 +33,8 @@ figure('Visible',visibility);
     title('Raw signal - frames')
     xlabel('Time [frames]');
     ylabel('Signal Intensity');
-    legend('CaSignal','NucSignal')
-    image_name = fullfile(output_path,'Raw Calcium and Nuclear Signal - frames');
+    legend('CaSignal','RefSignal')
+    image_name = fullfile(output_path,'Raw Calcium and Reference Signal - frames');
     saveas(gcf,image_name,'tiff');
     
     figure('Visible',visibility);
@@ -45,7 +45,7 @@ figure('Visible',visibility);
     title('Raw signal - time')
     xlabel('Time [s]');
     ylabel('Signal Intensity');
-    legend('CaSignal','NucSignal')
-    image_name = fullfile(output_path,'Raw Calcium and Nuclear Signal - seconds');
+    legend('CaSignal','RefSignal')
+    image_name = fullfile(output_path,'Raw Calcium and Reference Signal - seconds');
     saveas(gcf,image_name,'tiff');
 end
