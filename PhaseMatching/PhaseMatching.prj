@@ -4,8 +4,8 @@
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
-    <param.authnamewatermark>Raymond Zhang</param.authnamewatermark>
-    <param.email>raymond.zhang@monash.edu</param.email>
+    <param.authnamewatermark>Raymond Zhang, Renee Chow</param.authnamewatermark>
+    <param.email>renee.chow@monash.edu</param.email>
     <param.company>ARMI</param.company>
     <param.summary>Phase matching for biological processes.</param.summary>
     <param.description />
@@ -46,8 +46,6 @@
       <param.icon />
       <param.icons />
       <param.version />
-      <param.authnamewatermark />
-      <param.email />
       <param.company />
       <param.description />
       <param.guid />

@@ -1,4 +1,4 @@
-classdef Stability_Test < matlab.unittest.TestCase
+classdef PM_Stability_Test < matlab.unittest.TestCase
     % Ensure that the script versions run properly in case something has
     % changed
 
@@ -14,13 +14,13 @@ classdef Stability_Test < matlab.unittest.TestCase
         % Test methods
 
         function test_quiet(testCase)
-            actSol = run_script("SignalAnalysis_Quiet");
+            actSol = run_script("PhaseMatching_Quiet");
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol)
         end
 
         function test_verbose(testCase)
-            actSol = run_script("SignalAnalysis_Verbose");
+            actSol = run_script("PhaseMatching_Verbose");
             expSol = "Test ran to completion";
             testCase.verifyEqual(actSol, expSol)
         end

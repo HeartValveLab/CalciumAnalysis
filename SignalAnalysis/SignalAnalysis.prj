@@ -5,7 +5,7 @@
     <param.icons />
     <param.version>1.0</param.version>
     <param.authnamewatermark>Raymond Zhang</param.authnamewatermark>
-    <param.email>raymond.zhang@monash.edu</param.email>
+    <param.email>renee.chow@monash.edu</param.email>
     <param.company>ARMI</param.company>
     <param.summary>Performs signal analysis for calcium and nuclear channels.</param.summary>
     <param.description />
@@ -47,7 +47,6 @@
       <param.icons />
       <param.version />
       <param.authnamewatermark />
-      <param.email />
       <param.company />
       <param.description />
       <param.guid />
