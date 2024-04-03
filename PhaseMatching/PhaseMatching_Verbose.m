@@ -73,6 +73,9 @@ f2 = figure(2);
 f2.Visible = Visibility;
 plot(SsimScores); hold on;
 plot(PkLocs, Pks, "*");
+legend('Similarity scores','Peaks');
+xlabel('Frame');
+ylabel('Similarity score');
 title('Similarity scores for each frame')
 disp('Peaks located.');
 

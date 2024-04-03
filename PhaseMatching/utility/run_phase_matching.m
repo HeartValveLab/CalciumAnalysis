@@ -48,6 +48,9 @@ function run_phase_matching(input_data, input_params, visibility, output_folder,
     f2.Visible = visibility;
     plot(SsimScores); hold on;
     plot(PkLocs, Pks, "*");
+    legend('Similarity scores','Peaks');
+    xlabel('Frame');
+    ylabel('Similarity score');
     title('Similarity scores for each frame')
     disp('Peaks located.');
     
